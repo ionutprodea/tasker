@@ -7,7 +7,7 @@ const ShowTasks = () => {
   useEffect(() => {
     const storedTasks = window.localStorage.getItem("TASKER_TASKS");
     storedTasks && setTasks(JSON.parse(storedTasks));
-  }, []);
+  }, [tasks]);
 
   return (
     <div>
