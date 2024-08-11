@@ -12,11 +12,11 @@ const DeleteTask = () => {
   };
   const [tasks, setTasks] = useState<Task[]>([]);
   useEffect(() => {
-    const storedTasks = window.localStorage.getItem("TASKER_TASKS");
+    const storedTasks = localStorage.getItem("TASKER_TASKS");
     storedTasks && setTasks(JSON.parse(storedTasks));
   }, []);
   useEffect(() => {
-    window.localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
+    localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
   }, [tasks]);
 
   return (

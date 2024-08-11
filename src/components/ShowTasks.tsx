@@ -5,7 +5,7 @@ import { Task } from "../interfaces/Task";
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   useEffect(() => {
-    const storedTasks = window.localStorage.getItem("TASKER_TASKS");
+    const storedTasks = localStorage.getItem("TASKER_TASKS");
     storedTasks && setTasks(JSON.parse(storedTasks));
   }, [tasks]);
 

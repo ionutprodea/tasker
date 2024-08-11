@@ -17,7 +17,7 @@ type FormData = z.infer<typeof schema>;
 const AddTask = () => {
   const [tasks, setTasks] = useState<FormData[]>([]);
   useEffect(() => {
-    window.localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
+    localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
   }, [tasks]);
   const {
     register,
