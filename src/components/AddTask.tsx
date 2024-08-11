@@ -74,16 +74,6 @@ const AddTask = () => {
 
         <button type="submit">Submit</button>
       </form>
-      <div>
-        <ul>
-          {tasks.map((task) => (
-            <li key={task.task + task.date}>
-              Importance: {task.importance} | Task: {task.task} | Date:{" "}
-              {task.date} | Description: {task.details}
-            </li>
-          ))}
-        </ul>
-      </div>
     </>
   );
 };
