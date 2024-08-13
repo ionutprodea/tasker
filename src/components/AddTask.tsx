@@ -16,9 +16,20 @@ type FormData = z.infer<typeof schema>;
 
 const AddTask = () => {
   const [tasks, setTasks] = useState<FormData[]>([]);
+
+  // Load tasks from localStorage when the component mounts
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("TASKER_TASKS");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []); // Empty dependency array means this effect runs once when the component mounts
+
+  // Save tasks to localStorage whenever tasks state changes
   useEffect(() => {
     localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
   }, [tasks]);
+
   const {
     register,
     handleSubmit,
