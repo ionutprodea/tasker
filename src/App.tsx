@@ -6,8 +6,8 @@ function App() {
   return (
     <>
       <AddTask />
-      <ShowTasks />
-      <DeleteTask />
+      {/* <ShowTasks />
+      <DeleteTask /> */}
     </>
   );
 }
