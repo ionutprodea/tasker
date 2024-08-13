@@ -14,7 +14,7 @@ const DeleteTask = () => {
   useEffect(() => {
     const storedTasks = localStorage.getItem("TASKER_TASKS");
     storedTasks && setTasks(JSON.parse(storedTasks));
-  }, [tasks]);
+  }, []);
   useEffect(() => {
     localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
   }, [tasks]);
