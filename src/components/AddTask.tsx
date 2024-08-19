@@ -45,6 +45,7 @@ const AddTask = () => {
 
   return (
     <>
+      <h2>Add Tasks</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <select {...register("importance")} name="importance" id="importance">
           <option value="">Importance</option>

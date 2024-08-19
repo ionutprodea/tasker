@@ -21,6 +21,7 @@ const DeleteTask = () => {
 
   return (
     <div>
+      <h2>Delete Tasks</h2>
       <ul>
         {tasks.map((task) => (
           <li key={task.date + task.task}>
