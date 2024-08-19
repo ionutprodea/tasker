@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Task } from "../interfaces/Task";
 
 const DeleteTask = () => {
@@ -19,8 +19,13 @@ const DeleteTask = () => {
 
   // Function to remove a task
   const onRemove = (date: string, name: string) => {
+    console.log("Removing task:", name, date);
     setTasks((prevTasks) =>
-      prevTasks.filter((task) => !(task.task === name && task.date === date))
+      prevTasks.filter((task) => {
+        const shouldRemove = task.task === name && task.date === date;
+        console.log("Task:", task, "Remove:", shouldRemove);
+        return !shouldRemove;
+      })
     );
   };
 
@@ -31,7 +36,9 @@ const DeleteTask = () => {
         {tasks.map((task) => (
           <li key={task.date + task.task}>
             {task.task} | {task.importance}{" "}
-            <button onClick={() => onRemove(task.date, task.task)}>Remove</button>
+            <button onClick={() => onRemove(task.date, task.task)}>
+              Remove
+            </button>
           </li>
         ))}
       </ul>
