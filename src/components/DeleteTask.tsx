@@ -6,7 +6,7 @@ const DeleteTask = () => {
   const onRemove = (date: string, name: string) => {
     setTasks(
       tasks.filter((task: Task) => {
-        task.task !== name || task.date !== date;
+        task.task !== name && task.date !== date;
       })
     );
   };
