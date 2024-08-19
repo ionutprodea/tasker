@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-export interface Menu {
+interface Menu {
   task: boolean;
   add: boolean;
   delete: boolean;
@@ -11,34 +9,30 @@ interface Props {
 }
 
 const NavBar = ({ onSelectedMenu }: Props) => {
-  const [selectedMenu, setSelectedMenu] = useState<Menu>({
-    task: true,
-    add: false,
-    delete: false,
-  });
+  const handleMenuClick = (selectedMenu: Menu) => {
+    onSelectedMenu(selectedMenu);
+  };
+
   return (
     <>
       <div>
         <button
           onClick={() => {
-            setSelectedMenu({ task: true, add: false, delete: false });
-            onSelectedMenu(selectedMenu);
+            handleMenuClick({ task: true, add: false, delete: false });
           }}
         >
           Tasks
         </button>
         <button
           onClick={() => {
-            setSelectedMenu({ task: false, add: true, delete: false });
-            onSelectedMenu(selectedMenu);
+            handleMenuClick({ task: false, add: true, delete: false });
           }}
         >
           Add
         </button>
         <button
           onClick={() => {
-            setSelectedMenu({ task: false, add: false, delete: true });
-            onSelectedMenu(selectedMenu);
+            handleMenuClick({ task: false, add: false, delete: true });
           }}
         >
           Delete
