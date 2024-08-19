@@ -1,23 +1,28 @@
 import { useState, useEffect } from "react";
-//import { dummyTasks } from "./dummyTasks";
 import { Task } from "../interfaces/Task";
 
 const DeleteTask = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  // Load tasks from localStorage on component mount
+  useEffect(() => {
+    const storedTasks = window.localStorage.getItem("TASKER_TASKS");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  // Save tasks to localStorage whenever the tasks state changes
+  useEffect(() => {
+    window.localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
+  }, [tasks]);
+
+  // Function to remove a task
   const onRemove = (date: string, name: string) => {
-    setTasks(
-      tasks.filter((task: Task) => {
-        task.task !== name && task.date !== date;
-      })
+    setTasks((prevTasks) =>
+      prevTasks.filter((task) => !(task.task === name && task.date === date))
     );
   };
-  const [tasks, setTasks] = useState<Task[]>([]);
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("TASKER_TASKS");
-    storedTasks && setTasks(JSON.parse(storedTasks));
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
-  }, [tasks]);
 
   return (
     <div>
@@ -26,9 +31,7 @@ const DeleteTask = () => {
         {tasks.map((task) => (
           <li key={task.date + task.task}>
             {task.task} | {task.importance}{" "}
-            <button onClick={() => onRemove(task.date, task.task)}>
-              Delete
-            </button>
+            <button onClick={() => onRemove(task.date, task.task)}>Remove</button>
           </li>
         ))}
       </ul>
