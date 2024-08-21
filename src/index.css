@@ -1,1 +1,52 @@
+:root {
+    --primary_color: #2170c5;
+    --secondary_color: #fff;
+    --accent_color: #07d600;
+    --background_color: #2b2f33;
+}
+
+body {
+    background: var(--background_color);
+}
+
+.navbar {
+    background-color: var(--primary_color);
+}
+
+.navbar-brand {
+    color: var(--secondary_color);
+}
+
+.navbar-brand:hover {
+    color: var(--secondary_color);
+}
+
+.nav-link {
+    color : var(--secondary_color);
+}
+
+.nav-link:hover {
+    color: var(--secondary_color);
+}
+
+@media screen and (min-width: 768px) {
+
+    .nav-link {
+        transition: scale 0.5s;
+    }
+
+    .nav-link:hover {
+        scale: 1.2;
+    }
+}
+
+.navbar-toggler {
+    color: var(--secondary_color);
+}
+
+.navbar-toggler-icon {
+    color: var(--secondary_color);
+}
+
+
 
