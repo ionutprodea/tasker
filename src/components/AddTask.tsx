@@ -45,43 +45,53 @@ const AddTask = () => {
 
   return (
     <>
-      <h2>Add Tasks</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register("importance")} name="importance" id="importance">
-          <option value="">Importance</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
-        {errors.importance?.message && <p>{errors.importance.message}</p>}
-        <input
-          {...register("task")}
-          type="text"
-          name="task"
-          id="task"
-          placeholder="Task..."
-        />
-        {errors.task?.message && <p>{errors.task.message}</p>}
-        <input
-          {...register("date")}
-          type="text"
-          name="date"
-          id="date"
-          placeholder="Date: __/__/20__"
-        />
-        {errors.date?.message && <p>{errors.date.message}</p>}
-
-        <input
-          {...register("details")}
-          type="text"
-          name="details"
-          id="details"
-          placeholder="Description..."
-        />
-        {errors.details?.message && <p>{errors.details.message}</p>}
-
-        <button type="submit">Submit</button>
-      </form>
+      <h2 className="m-3">Add Tasks</h2>
+      <div className="m-5">
+        <form className="" onSubmit={handleSubmit(onSubmit)}>
+          <select
+            {...register("importance")}
+            name="importance"
+            id="importance"
+            className="form-select mb-4"
+          >
+            <option value="">Importance</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+          {errors.importance?.message && <p>{errors.importance.message}</p>}
+          <input
+            {...register("task")}
+            type="text"
+            name="task"
+            id="task"
+            placeholder="Task..."
+            className="form-control mb-4"
+          />
+          {errors.task?.message && <p>{errors.task.message}</p>}
+          <input
+            {...register("date")}
+            type="text"
+            name="date"
+            id="date"
+            placeholder="Date: __/__/20__"
+            className="form-control mb-4"
+          />
+          {errors.date?.message && <p>{errors.date.message}</p>}
+          <input
+            {...register("details")}
+            type="text"
+            name="details"
+            id="details"
+            placeholder="Description..."
+            className="form-control mb-4"
+          />
+          {errors.details?.message && <p>{errors.details.message}</p>}
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </form>
+      </div>
     </>
   );
 };
