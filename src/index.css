@@ -7,7 +7,9 @@
 
 body {
     background: var(--background_color);
+    font-size: large;
 }
+
 
 h2 {
     color: var(--secondary_color);
@@ -22,6 +24,7 @@ h2 {
 
 .navbar-brand {
     color: var(--secondary_color);
+    font-size: x-large;
 }
 
 .navbar-brand:hover {
@@ -72,6 +75,7 @@ h2 {
     background-color: var(--background_color);
     border-color: var(--primary_color);
     border-radius: 20px;
+    font-size: large;
 }
 
 .form-control {
@@ -82,7 +86,10 @@ h2 {
 }
 
 .form-control::placeholder{
+    position: absolute;
+    top: 6px;
     color: var(--secondary_color);
+    font-size: large;
 }
 
 .form-control:focus {
@@ -103,6 +110,7 @@ h2 {
     border-color: var(--primary_color);
     border-radius: 20px;
     transition: all ease-in-out 0.7s;
+    font-size: large;
 }
 
 .btn-primary:hover {

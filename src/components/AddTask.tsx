@@ -45,7 +45,7 @@ const AddTask = () => {
 
   return (
     <>
-      <h2 className="m-3">Add Tasks</h2>
+      <h2 className="m-5">Add Tasks</h2>
       <div className="m-5 form-container">
         <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
           <select
@@ -95,9 +95,11 @@ const AddTask = () => {
           {errors.details?.message && (
             <p className="form-error">{errors.details.message}</p>
           )}
-          <button type="submit" className="btn btn-primary px-5">
-            Submit
-          </button>
+          <div className="d-flex justify-content-center">
+            <button type="submit" className="btn btn-primary px-5">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </>

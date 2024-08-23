@@ -27,7 +27,7 @@ const NavBar = ({ onSelectedMenu }: Props) => {
               handleMenuClick({ task: true, add: false, delete: false });
             }}
           >
-            Tasker
+            TASKER
           </a>
           <button
             className="navbar-toggler me-4"
@@ -42,7 +42,7 @@ const NavBar = ({ onSelectedMenu }: Props) => {
           </button>
           <div className="collapse navbar-collapse ms-4" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              <li className="nav-item me-3">
                 <a
                   className="nav-link"
                   href="#"
@@ -53,7 +53,7 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                   Show Tasks
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item me-3">
                 <a
                   className="nav-link"
                   href="#"
@@ -64,7 +64,7 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                   Add Tasks
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item me-3">
                 <a
                   className="nav-link"
                   href="#"
