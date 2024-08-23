@@ -39,7 +39,7 @@ h2 {
 @media screen and (min-width: 768px) {
 
     .nav-link {
-        transition: scale 0.5s;
+        transition: scale ease-in 0.3s;
     }
 
     .nav-link:hover {
@@ -58,6 +58,14 @@ h2 {
 
 /* Form */
 
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-task {
+    width: 700px;
+}
 
 .form-select {
     color: var(--secondary_color);
@@ -67,7 +75,36 @@ h2 {
 }
 
 .form-control {
+    color: var(--secondary_color);
     background-color: var(--background_color);
     border-color: var(--primary_color);
     border-radius: 20px;
+}
+
+.form-control::placeholder{
+    color: var(--secondary_color);
+}
+
+.form-control:focus {
+    color: var(--secondary_color);
+    background-color: var(--background_color);
+}
+
+.form-error {
+    color: var(--secondary_color);
+}
+
+.details {
+    height: 200px;
+}
+
+.btn-primary {
+    background-color: var(--background_color);
+    border-color: var(--primary_color);
+    border-radius: 20px;
+    transition: all ease-in-out 0.7s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary_color);
 }

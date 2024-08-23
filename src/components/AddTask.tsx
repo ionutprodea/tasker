@@ -46,8 +46,8 @@ const AddTask = () => {
   return (
     <>
       <h2 className="m-3">Add Tasks</h2>
-      <div className="m-5">
-        <form className="" onSubmit={handleSubmit(onSubmit)}>
+      <div className="m-5 form-container">
+        <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
           <select
             {...register("importance")}
             name="importance"
@@ -59,7 +59,9 @@ const AddTask = () => {
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
-          {errors.importance?.message && <p>{errors.importance.message}</p>}
+          {errors.importance?.message && (
+            <p className="form-error">{errors.importance.message}</p>
+          )}
           <input
             {...register("task")}
             type="text"
@@ -68,7 +70,9 @@ const AddTask = () => {
             placeholder="Task..."
             className="form-control mb-4"
           />
-          {errors.task?.message && <p>{errors.task.message}</p>}
+          {errors.task?.message && (
+            <p className="form-error">{errors.task.message}</p>
+          )}
           <input
             {...register("date")}
             type="text"
@@ -77,17 +81,21 @@ const AddTask = () => {
             placeholder="Date: __/__/20__"
             className="form-control mb-4"
           />
-          {errors.date?.message && <p>{errors.date.message}</p>}
+          {errors.date?.message && (
+            <p className="form-error">{errors.date.message}</p>
+          )}
           <input
             {...register("details")}
             type="text"
             name="details"
             id="details"
             placeholder="Description..."
-            className="form-control mb-4"
+            className="form-control mb-4 details"
           />
-          {errors.details?.message && <p>{errors.details.message}</p>}
-          <button type="submit" className="btn btn-primary">
+          {errors.details?.message && (
+            <p className="form-error">{errors.details.message}</p>
+          )}
+          <button type="submit" className="btn btn-primary px-5">
             Submit
           </button>
         </form>
