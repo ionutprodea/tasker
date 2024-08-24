@@ -11,7 +11,7 @@ const ShowTasks = () => {
 
   return (
     <div>
-      <h2 className="m-5">Tasks</h2>
+      <h1 className="m-5">Tasks</h1>
       <div className="m-5 centered-container">
         <ul className="list-group">
           {tasks.map((task) => (

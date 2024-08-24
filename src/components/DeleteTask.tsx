@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Task } from "../interfaces/Task";
+import { dummyTasks } from "./dummyTasks";
 
 const DeleteTask = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -31,17 +32,31 @@ const DeleteTask = () => {
 
   return (
     <div>
-      <h2>Delete Tasks</h2>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.date + task.task}>
-            {task.task} | {task.importance}{" "}
-            <button onClick={() => onRemove(task.date, task.task)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+      <h1 className="m-5">Delete Tasks</h1>
+      <div className="m-5 centered-container">
+        <ul className="list-group">
+          {dummyTasks.map((task) => (
+            <li
+              className="list-group-item d-flex justify-content-between align-items-center"
+              key={task.date + task.task}
+            >
+              <div className="d-flex justify-content-start align-items-center">
+                <p className="my-1 me-3">{task.task}</p>
+                <span className={task.importance}>
+                  {task.importance.toUpperCase()}
+                </span>
+                <span className="ms-3 task-date">{task.date}</span>
+              </div>
+              <button
+                className="btn btn-primary"
+                onClick={() => onRemove(task.date, task.task)}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

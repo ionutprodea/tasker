@@ -48,7 +48,7 @@ const AddTask = () => {
 
   return (
     <>
-      <h2 className="m-5">Add Tasks</h2>
+      <h1 className="m-5">Add Tasks</h1>
       <div className="m-5 centered-container">
         <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
           <select
