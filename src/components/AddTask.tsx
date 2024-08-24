@@ -69,6 +69,7 @@ const AddTask = () => {
             id="task"
             placeholder="Task..."
             className="form-control mb-4"
+            autoComplete="off"
           />
           {errors.task?.message && (
             <p className="form-error">{errors.task.message}</p>
@@ -80,17 +81,18 @@ const AddTask = () => {
             id="date"
             placeholder="Date: __/__/20__"
             className="form-control mb-4"
+            autoComplete="off"
           />
           {errors.date?.message && (
             <p className="form-error">{errors.date.message}</p>
           )}
-          <input
+          <textarea
             {...register("details")}
-            type="text"
             name="details"
             id="details"
             placeholder="Description..."
             className="form-control mb-4 details"
+            autoComplete="off"
           />
           {errors.details?.message && (
             <p className="form-error">{errors.details.message}</p>
