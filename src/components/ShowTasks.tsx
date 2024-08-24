@@ -27,7 +27,7 @@ const ShowTasks = () => {
                 <span className="ms-3 task-date">{task.date}</span>
               </div>
               <input
-                className="form-check-input"
+                className="form-check-input shadow-none"
                 type="checkbox"
                 name="task_status"
                 id={task.task + task.date}

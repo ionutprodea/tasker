@@ -144,7 +144,7 @@ h1, h2 {
 }
 
 .form-check-input:focus {
-    display: none;
+    border: none;
 }
 
 .form-check-input:checked {
