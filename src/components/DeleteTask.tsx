@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Task } from "../interfaces/Task";
-import { dummyTasks } from "./dummyTasks";
+//import { dummyTasks } from "./dummyTasks";
 
 const DeleteTask = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -35,7 +35,7 @@ const DeleteTask = () => {
       <h1 className="m-5">Delete Tasks</h1>
       <div className="m-5 centered-container">
         <ul className="list-group">
-          {dummyTasks.map((task) => (
+          {tasks.map((task) => (
             <li
               className="list-group-item d-flex justify-content-between align-items-center"
               key={task.date + task.task}
