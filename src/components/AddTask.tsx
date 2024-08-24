@@ -5,7 +5,10 @@ import { useState, useEffect } from "react";
 
 const schema = z.object({
   importance: z.string().min(1, { message: "Select importance" }),
-  task: z.string().min(3, { message: "Required, at least 3 letters" }),
+  task: z
+    .string()
+    .min(3, { message: "Required, at least 3 letters" })
+    .max(20, { message: "Maximum 20 letters" }),
   date: z.string().refine((value) => /^\d{2}\/\d{2}\/\d{4}$/.test(value), {
     message: "Invalid date format. Use DD/MM/YYYY",
   }),
@@ -46,7 +49,7 @@ const AddTask = () => {
   return (
     <>
       <h2 className="m-5">Add Tasks</h2>
-      <div className="m-5 form-container">
+      <div className="m-5 centered-container">
         <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
           <select
             {...register("importance")}

@@ -8,7 +8,7 @@ export const dummyTasks = [
 
     {
         importance: "high",
-        task: "dummyTask2",
+        task: "dummyTask2averyLongTas",
         date: "12/09/2024",
         details: "what to do detailed"
     },

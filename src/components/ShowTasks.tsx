@@ -11,15 +11,31 @@ const ShowTasks = () => {
 
   return (
     <div>
-      <h2>Tasks</h2>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.date + task.task}>
-            {task.task} | {task.importance}{" "}
-            <input type="checkbox" name="task_status" id="task_status" />
-          </li>
-        ))}
-      </ul>
+      <h2 className="m-5">Tasks</h2>
+      <div className="m-5 centered-container">
+        <ul className="list-group">
+          {tasks.map((task) => (
+            <li
+              className="list-group-item d-flex justify-content-between align-items-center"
+              key={task.date + task.task}
+            >
+              <div className="d-flex justify-content-start align-items-center">
+                <p className="my-1 me-3">{task.task}</p>
+                <span className={task.importance}>
+                  {task.importance.toUpperCase()}
+                </span>
+                <span className="ms-3 task-date">{task.date}</span>
+              </div>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="task_status"
+                id={task.task + task.date}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
