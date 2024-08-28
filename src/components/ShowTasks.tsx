@@ -9,12 +9,21 @@ const ShowTasks = () => {
     storedTasks && setTasks(JSON.parse(storedTasks));
   }, []);
 
+  const handleCheckboxChange = (index: number) => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === index ? { ...task, status: !task.status } : task
+    );
+
+    setTasks(updatedTasks);
+    localStorage.setItem("TASKER_TASKS", JSON.stringify(updatedTasks));
+  };
+
   return (
     <div>
       <h1 className="m-5">Tasks</h1>
       <div className="m-5 centered-container">
         <ul className="list-group">
-          {tasks.map((task) => (
+          {tasks.map((task, index) => (
             <li
               className="list-group-item d-flex justify-content-between align-items-center"
               key={task.date + task.task}
@@ -31,6 +40,8 @@ const ShowTasks = () => {
                 type="checkbox"
                 name="task_status"
                 id={task.task + task.date}
+                checked={task.status} // Checkbox will be checked if status is true
+                onChange={() => handleCheckboxChange(index)} // Toggle status on change
               />
             </li>
           ))}
