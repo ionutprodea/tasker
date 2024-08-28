@@ -1,4 +1,5 @@
 interface Menu {
+  home: boolean;
   task: boolean;
   add: boolean;
   delete: boolean;
@@ -24,7 +25,12 @@ const NavBar = ({ onSelectedMenu }: Props) => {
             className="navbar-brand me-5 ms-4"
             href="#"
             onClick={() => {
-              handleMenuClick({ task: true, add: false, delete: false });
+              handleMenuClick({
+                home: true,
+                task: false,
+                add: false,
+                delete: false,
+              });
             }}
           >
             TASKER
@@ -47,7 +53,12 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                   className="nav-link"
                   href="#"
                   onClick={() => {
-                    handleMenuClick({ task: true, add: false, delete: false });
+                    handleMenuClick({
+                      home: false,
+                      task: true,
+                      add: false,
+                      delete: false,
+                    });
                   }}
                 >
                   Show Tasks
@@ -58,7 +69,12 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                   className="nav-link"
                   href="#"
                   onClick={() => {
-                    handleMenuClick({ task: false, add: true, delete: false });
+                    handleMenuClick({
+                      home: false,
+                      task: false,
+                      add: true,
+                      delete: false,
+                    });
                   }}
                 >
                   Add Tasks
@@ -69,7 +85,12 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                   className="nav-link"
                   href="#"
                   onClick={() => {
-                    handleMenuClick({ task: false, add: false, delete: true });
+                    handleMenuClick({
+                      home: false,
+                      task: false,
+                      add: false,
+                      delete: true,
+                    });
                   }}
                 >
                   Delete Tasks

@@ -3,6 +3,7 @@ import AddTask from "./components/AddTask";
 import DeleteTask from "./components/DeleteTask";
 import ShowTasks from "./components/ShowTasks";
 import NavBar from "./components/NavBar";
+import Home from "./components/Home";
 
 function App() {
   // Retrieve the state from localStorage or use the default state
@@ -10,7 +11,7 @@ function App() {
     const savedMenu = localStorage.getItem("selectedMenu");
     return savedMenu
       ? JSON.parse(savedMenu)
-      : { task: true, add: false, delete: false }; // Default state
+      : { home: true, task: false, add: false, delete: false }; // Default state
   });
   // Save the state to localStorage whenever it changes
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
   return (
     <>
       <NavBar onSelectedMenu={setSelectedMenu} />
+      {selectedMenu.home && <Home />}
       {selectedMenu.task && <ShowTasks />}
       {selectedMenu.add && <AddTask />}
       {selectedMenu.delete && <DeleteTask />}
