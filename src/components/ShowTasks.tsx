@@ -22,7 +22,9 @@ const ShowTasks = () => {
   const [sortOption, setSortOption] = useState("");
   const handleSortChange = (value: string) => {
     setSortOption(value);
-    TaskSorter(sortOption, tasks);
+    const sortedTasks = TaskSorter(sortOption, tasks);
+    if (sortedTasks) setTasks(sortedTasks);
+    localStorage.setItem("TASKER_TASKS", JSON.stringify(sortedTasks));
   };
   return (
     <div>
