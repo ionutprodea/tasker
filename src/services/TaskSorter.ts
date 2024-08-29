@@ -18,7 +18,8 @@ export function highToLow (arr: Task[]) {
         if (element.importance === "low") arrLow.push(element);
     });
     // Return sorted array, from high importance first to low importance last.
-    return arrHigh.concat(arrMedium.concat(arrLow));
+    let result = arrHigh.concat(arrMedium.concat(arrLow));
+    return result;
 };
 
 export function lowToHigh (arr: Task[]) {
@@ -32,7 +33,8 @@ export function lowToHigh (arr: Task[]) {
         if (element.importance === "low") arrLow.push(element);
     });
     // Return sorted array, from low importance first to high importance last.
-    return arrLow.concat(arrMedium.concat(arrHigh));
+    let result = arrLow.concat(arrMedium.concat(arrHigh))
+    return result;
 };
 
 export function dateDescending (arr: Task[]) {
