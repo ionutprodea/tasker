@@ -35,7 +35,7 @@ export function lowToHigh (arr: Task[]) {
     return arrLow.concat(arrMedium.concat(arrHigh));
 };
 
-export function dateAscending (arr: Task[]) {
+export function dateDescending (arr: Task[]) {
     return arr.sort((a, b) => {
         // Split the date strings into [day, month, year] and convert to numbers
         const [dayA, monthA, yearA] = a.date.split('/').map(Number);
@@ -50,7 +50,7 @@ export function dateAscending (arr: Task[]) {
     });
 };
 
-export function dateDescending (arr: Task[]) {
+export function dateAscending (arr: Task[]) {
     return arr.sort((a, b) => {
         // Split the date strings into [day, month, year] and convert to numbers
         const [dayA, monthA, yearA] = a.date.split('/').map(Number);
