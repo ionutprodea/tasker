@@ -1,5 +1,12 @@
 import { Task } from "../interfaces/Task";
 
+export function TaskSorter (sortType: string, arr: Task[]) {
+    if (sortType === " high-low") return highToLow(arr);
+    if (sortType === " low-high") return lowToHigh(arr);
+    if (sortType === "date-ascending") return dateAscending(arr);
+    if (sortType === "date-descending") return dateDescending(arr);
+};
+
 export function highToLow (arr: Task[]) {
     let arrHigh: Task[] = [];
     let arrMedium: Task[] = [];

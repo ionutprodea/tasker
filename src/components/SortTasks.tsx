@@ -1,7 +1,16 @@
-const SortTasks = () => {
+import { ChangeEvent } from "react";
+
+interface Props {
+  onSortChange: (sortOption: string) => void;
+}
+
+const SortTasks = ({ onSortChange }: Props) => {
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    onSortChange(event.target.value);
+  };
   return (
     <div className="centered-container">
-      <select className="form-select">
+      <select className="form-select" onChange={handleSortChange}>
         <option value="">Sort Tasks</option>
         <option value="high-low">Importance High to Low</option>
         <option value="low-high">Importance Low to High</option>

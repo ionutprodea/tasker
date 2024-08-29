@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 //import { dummyTasks } from "./dummyTasks";
 import { Task } from "../interfaces/Task";
 import SortTasks from "./SortTasks";
+import { TaskSorter } from "../services/TaskSorter";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -18,12 +19,16 @@ const ShowTasks = () => {
     setTasks(updatedTasks);
     localStorage.setItem("TASKER_TASKS", JSON.stringify(updatedTasks));
   };
-
+  const [sortOption, setSortOption] = useState("");
+  const handleSortChange = (value: string) => {
+    setSortOption(value);
+    TaskSorter(sortOption, tasks);
+  };
   return (
     <div>
       <h1 className="m-5">Tasks</h1>
       <div className="centered-container">
-        <SortTasks />
+        <SortTasks onSortChange={handleSortChange} />
       </div>
       <div className="m-5 centered-container">
         <ul className="list-group">
