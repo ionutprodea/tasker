@@ -1,13 +1,6 @@
 import { Task } from "../interfaces/Task";
 
-export function TaskSorter (sortType: string, arr: Task[]) {
-    if (sortType === " high-low") return highToLow(arr);
-    if (sortType === " low-high") return lowToHigh(arr);
-    if (sortType === "date-ascending") return dateAscending(arr);
-    if (sortType === "date-descending") return dateDescending(arr);
-};
-
-export function highToLow (arr: Task[]) {
+const highToLow = (arr: Task[]) => {
     let arrHigh: Task[] = [];
     let arrMedium: Task[] = [];
     let arrLow: Task[] = [];
@@ -22,7 +15,7 @@ export function highToLow (arr: Task[]) {
     return result;
 };
 
-export function lowToHigh (arr: Task[]) {
+const lowToHigh = (arr: Task[]) => {
     let arrHigh: Task[] = [];
     let arrMedium: Task[] = [];
     let arrLow: Task[] = [];
@@ -36,8 +29,7 @@ export function lowToHigh (arr: Task[]) {
     let result = arrLow.concat(arrMedium.concat(arrHigh))
     return result;
 };
-
-export function dateDescending (arr: Task[]) {
+const dateDescending = (arr: Task[]) => {
     return arr.sort((a, b) => {
         // Split the date strings into [day, month, year] and convert to numbers
         const [dayA, monthA, yearA] = a.date.split('/').map(Number);
@@ -52,7 +44,7 @@ export function dateDescending (arr: Task[]) {
     });
 };
 
-export function dateAscending (arr: Task[]) {
+const dateAscending = (arr: Task[]) => {
     return arr.sort((a, b) => {
         // Split the date strings into [day, month, year] and convert to numbers
         const [dayA, monthA, yearA] = a.date.split('/').map(Number);
@@ -66,3 +58,10 @@ export function dateAscending (arr: Task[]) {
         return dateB.getTime() - dateA.getTime();
     });
 }
+
+export const TaskSorter = (sortType: string, arr: Task[]) => {
+    if (sortType === " high-low") return highToLow(arr);
+    if (sortType === " low-high") return lowToHigh(arr);
+    if (sortType === "date-ascending") return dateAscending(arr);
+    if (sortType === "date-descending") return dateDescending(arr);
+};
