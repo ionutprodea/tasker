@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 //import { dummyTasks } from "./dummyTasks";
 import { Task } from "../interfaces/Task";
+import SortTasks from "./SortTasks";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -21,6 +22,9 @@ const ShowTasks = () => {
   return (
     <div>
       <h1 className="m-5">Tasks</h1>
+      <div className="centered-container">
+        <SortTasks />
+      </div>
       <div className="m-5 centered-container">
         <ul className="list-group">
           {tasks.map((task, index) => (
