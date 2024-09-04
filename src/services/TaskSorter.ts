@@ -60,8 +60,8 @@ const dateAscending = (arr: Task[]) => {
 }
 
 export const TaskSorter = (sortType: string, arr: Task[]) => {
-    if (sortType === " high-low") return highToLow(arr);
-    if (sortType === " low-high") return lowToHigh(arr);
+    if (sortType === "high-low") return highToLow(arr);
+    if (sortType === "low-high") return lowToHigh(arr);
     if (sortType === "date-ascending") return dateAscending(arr);
     if (sortType === "date-descending") return dateDescending(arr);
 };
