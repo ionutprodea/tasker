@@ -40,7 +40,7 @@ const dateDescending = (arr: Task[]) => {
         const dateB = new Date(yearB, monthB - 1, dayB);
 
         // Compare the two dates
-        return dateA.getTime() - dateB.getTime();
+        return dateB.getTime() - dateA.getTime();
     });
 };
 
@@ -55,7 +55,7 @@ const dateAscending = (arr: Task[]) => {
         const dateB = new Date(yearB, monthB - 1, dayB);
 
         // Compare the two dates
-        return dateB.getTime() - dateA.getTime();
+        return dateA.getTime() - dateB.getTime();
     });
 }
 
