@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 //import { dummyTasks } from "./dummyTasks";
 import { Task } from "../interfaces/Task";
-//import SortTasks from "./SortTasks";
-//import { TaskSorter } from "../services/TaskSorter";
+import SortTasks from "./SortTasks";
+import { TaskSorter } from "../services/TaskSorter";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [sortOption, setSortOption] = useState("high-low");
   useEffect(() => {
     const storedTasks = localStorage.getItem("TASKER_TASKS");
-    storedTasks && setTasks(JSON.parse(storedTasks));
-  }, []);
+    if (storedTasks) {
+      const parsedTasks = JSON.parse(storedTasks);
+      const sortedTasks = TaskSorter(sortOption, parsedTasks || []);
+      sortedTasks && setTasks(sortedTasks);
+    }
+  }, [sortOption]);
 
   const handleCheckboxChange = (index: number) => {
     const updatedTasks = tasks.map((task, i) =>
@@ -22,6 +27,7 @@ const ShowTasks = () => {
   return (
     <div>
       <h1 className="m-5">Tasks</h1>
+      <SortTasks onSortChange={setSortOption} />
       <div className="centered-container"></div>
       <div className="m-5 centered-container">
         <ul className="list-group">
