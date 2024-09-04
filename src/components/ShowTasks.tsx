@@ -11,7 +11,7 @@ const ShowTasks = () => {
     const storedTasks = localStorage.getItem("TASKER_TASKS");
     if (storedTasks) {
       const parsedTasks = JSON.parse(storedTasks);
-      const sortedTasks = TaskSorter(sortOption, parsedTasks || []);
+      const sortedTasks = TaskSorter(sortOption, parsedTasks);
       sortedTasks && setTasks(sortedTasks);
     }
   }, [sortOption]);
