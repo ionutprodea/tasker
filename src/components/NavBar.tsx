@@ -1,9 +1,4 @@
-interface Menu {
-  home: boolean;
-  task: boolean;
-  add: boolean;
-  delete: boolean;
-}
+import { Menu } from "../interfaces/Menu";
 
 interface Props {
   onSelectedMenu: (selectedMenu: Menu) => void;
@@ -30,6 +25,8 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                 task: false,
                 add: false,
                 delete: false,
+                about: false,
+                contact: false,
               });
             }}
           >
@@ -58,6 +55,8 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                       task: true,
                       add: false,
                       delete: false,
+                      about: false,
+                      contact: false,
                     });
                   }}
                 >
@@ -74,6 +73,8 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                       task: false,
                       add: true,
                       delete: false,
+                      about: false,
+                      contact: false,
                     });
                   }}
                 >
@@ -90,6 +91,8 @@ const NavBar = ({ onSelectedMenu }: Props) => {
                       task: false,
                       add: false,
                       delete: true,
+                      about: false,
+                      contact: false,
                     });
                   }}
                 >
