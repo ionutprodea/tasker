@@ -10,6 +10,9 @@ body {
     font-size: large;
 }
 
+.app-container {
+    min-height: 100vh;
+}
 
 h1, h2 {
     color: var(--secondary_color);
@@ -164,4 +167,12 @@ h1, h2 {
     .task-date {
         display: block;
     }
+}
+
+/* Footer */
+
+.footer {
+    background-color: black;
+    height: 60px;
+    opacity: 30%;
 }

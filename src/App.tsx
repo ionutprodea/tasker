@@ -28,12 +28,16 @@ function App() {
 
   return (
     <>
-      <NavBar onSelectedMenu={setSelectedMenu} />
-      {selectedMenu.home && <Home />}
-      {selectedMenu.task && <ShowTasks />}
-      {selectedMenu.add && <AddTask />}
-      {selectedMenu.delete && <DeleteTask />}
-      <Footer onSelectedMenu={setSelectedMenu} />
+      <div className="app-container d-flex flex-column justify-content-between">
+        <div>
+          <NavBar onSelectedMenu={setSelectedMenu} />
+          {selectedMenu.home && <Home />}
+          {selectedMenu.task && <ShowTasks />}
+          {selectedMenu.add && <AddTask />}
+          {selectedMenu.delete && <DeleteTask />}
+        </div>
+        <Footer onSelectedMenu={setSelectedMenu} />
+      </div>
     </>
   );
 }
