@@ -71,6 +71,10 @@ h1, h2 {
     width: 700px;
 }
 
+.sort {
+    width: 700px;
+}
+
 .form-select {
     color: var(--secondary_color);
     background-color: var(--background_color);

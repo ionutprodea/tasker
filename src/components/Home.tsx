@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-//import { dummyTasks } from "./dummyTasks";
 import { Task } from "../interfaces/Task";
 import { CurrentDate } from "../services/CurrentDate";
 
 const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+
+  // Load tasks from localStorage
   useEffect(() => {
     const storedTasks = localStorage.getItem("TASKER_TASKS");
     storedTasks && setTasks(JSON.parse(storedTasks));
   }, []);
-
+  // Saves tasks status to localStorage everytime a checkbox is checked/unchecked
   const handleCheckboxChange = (index: number) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, status: !task.status } : task

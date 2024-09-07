@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-//import { dummyTasks } from "./dummyTasks";
 import { Task } from "../interfaces/Task";
 import SortTasks from "./SortTasks";
 import { TaskSorter } from "../services/TaskSorter";
@@ -7,6 +6,8 @@ import { TaskSorter } from "../services/TaskSorter";
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [sortOption, setSortOption] = useState("high-low");
+
+  // Load tasks from localStorage
   useEffect(() => {
     const storedTasks = localStorage.getItem("TASKER_TASKS");
     if (storedTasks) {
@@ -15,7 +16,7 @@ const ShowTasks = () => {
       sortedTasks && setTasks(sortedTasks);
     }
   }, [sortOption]);
-
+  // Saves tasks status to localStorage everytime a checkbox is checked/unchecked
   const handleCheckboxChange = (index: number) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, status: !task.status } : task
@@ -28,7 +29,6 @@ const ShowTasks = () => {
     <div>
       <h1 className="m-5">Tasks</h1>
       <SortTasks onSortChange={setSortOption} />
-      <div className="centered-container"></div>
       <div className="m-5 centered-container">
         <ul className="list-group">
           {tasks.map((task, index) => (

@@ -8,7 +8,7 @@ const SortTasks = ({ onSortChange }: Props) => {
   };
   return (
     <div className="centered-container">
-      <select className="form-select" onChange={handleSortChange}>
+      <select className="form-select mx-5 sort" onChange={handleSortChange}>
         <option value="">Sort Tasks</option>
         <option value="high-low">Importance High to Low</option>
         <option value="low-high">Importance Low to High</option>

@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { Task } from "../interfaces/Task";
-//import { dummyTasks } from "./dummyTasks";
+import { TaskSorter } from "../services/TaskSorter";
+import SortTasks from "./SortTasks";
 
 const DeleteTask = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [sortOption, setSortOption] = useState("high-low");
 
-  // Load tasks from localStorage on component mount
+  // Load tasks from localStorage
   useEffect(() => {
-    const storedTasks = window.localStorage.getItem("TASKER_TASKS");
+    const storedTasks = localStorage.getItem("TASKER_TASKS");
     if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
+      const parsedTasks = JSON.parse(storedTasks);
+      const sortedTasks = TaskSorter(sortOption, parsedTasks);
+      sortedTasks && setTasks(sortedTasks);
     }
-  }, []);
+  }, [sortOption]);
 
   // Save tasks to localStorage whenever the tasks state changes
   useEffect(() => {
@@ -33,6 +37,7 @@ const DeleteTask = () => {
   return (
     <div>
       <h1 className="m-5">Delete Tasks</h1>
+      <SortTasks onSortChange={setSortOption} />
       <div className="m-5 centered-container">
         <ul className="list-group">
           {tasks.map((task) => (
