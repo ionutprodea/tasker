@@ -18,6 +18,16 @@ h1, h2 {
     color: var(--secondary_color);
 }
 
+.text {
+    color: var(--secondary_color);
+    text-indent: 50px;
+    text-align: justify;
+}
+
+.text-container {
+    width: 700px;
+}
+
 .centered-container {
     display: flex;
     justify-content: center;
