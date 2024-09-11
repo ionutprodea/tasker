@@ -36,15 +36,19 @@ const ShowTasks = () => {
               className="list-group-item d-flex justify-content-between align-items-center"
               key={task.date + task.task}
             >
-              <div className="d-flex justify-content-start align-items-center">
-                <p className="my-1 me-3">{task.task}</p>
-                <span className={task.importance}>
-                  {task.importance.toUpperCase()}
-                </span>
-                <span className="ms-3 task-date">{task.date}</span>
+              <div>
+                <div className="d-flex justify-content-start align-items-center">
+                  <p className="my-1 me-3">{task.task}</p>
+                  <span className={task.importance}>
+                    {task.importance.toUpperCase()}
+                  </span>
+                  <span className="ms-3 task-date">{task.date}</span>
+                </div>
+                <p className="my-1 task-date-mobile">{task.date}</p>
+                <p className="my-1 task-details">{task.details}</p>
               </div>
               <input
-                className="form-check-input shadow-none"
+                className="form-check-input shadow-none align-self-start"
                 type="checkbox"
                 name="task_status"
                 id={task.task + task.date}

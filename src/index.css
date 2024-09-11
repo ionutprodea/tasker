@@ -177,7 +177,12 @@ h1, h2 {
     .task-date {
         display: block;
     }
+
+    .task-date-mobile {
+        display: none;
+    }
 }
+
 
 /* Footer */
 
