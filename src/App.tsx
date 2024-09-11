@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import Contact from "./components/Contact";
 
 function App() {
   // Retrieve the state from localStorage or use the default state
@@ -37,6 +38,7 @@ function App() {
           {selectedMenu.add && <AddTask />}
           {selectedMenu.delete && <DeleteTask />}
           {selectedMenu.about && <About />}
+          {selectedMenu.contact && <Contact />}
         </div>
         <Footer onSelectedMenu={setSelectedMenu} />
       </div>
