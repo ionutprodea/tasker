@@ -4,4 +4,5 @@ export interface Task {
     date: string;
     details: string;
     status: boolean;
+    showDetails: boolean;
   }

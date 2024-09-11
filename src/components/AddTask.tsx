@@ -8,11 +8,14 @@ const schema = z.object({
   task: z
     .string()
     .min(3, { message: "Required, at least 3 letters" })
-    .max(20, { message: "Maximum 20 letters" }),
+    .max(16, { message: "Maximum 16 letters" }),
   date: z.string().refine((value) => /^\d{2}\/\d{2}\/\d{4}$/.test(value), {
     message: "Invalid date format. Use DD/MM/YYYY",
   }),
-  details: z.string().min(8, { message: "Required, at least 8 letters" }),
+  details: z
+    .string()
+    .min(8, { message: "Required, at least 8 letters" })
+    .max(500, { message: "Maximum 500 letters" }),
 });
 
 type FormData = z.infer<typeof schema>;

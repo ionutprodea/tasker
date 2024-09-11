@@ -25,6 +25,12 @@ const ShowTasks = () => {
     setTasks(updatedTasks);
     localStorage.setItem("TASKER_TASKS", JSON.stringify(updatedTasks));
   };
+  const handleToggleDetails = (index: number) => {
+    const toggledTasks = tasks.map((task, i) =>
+      i === index ? { ...task, showDetails: !task.showDetails } : task
+    );
+    setTasks(toggledTasks);
+  };
   return (
     <div>
       <h1 className="m-5">Tasks</h1>
@@ -43,15 +49,24 @@ const ShowTasks = () => {
                     {task.importance.toUpperCase()}
                   </span>
                   <span className="ms-3 task-date">{task.date}</span>
+                  <div className="checkbox-wrapper-50">
+                    <input
+                      className="form-check-input shadow-none align-self-start mx-3 my-2 plus-minus"
+                      type="checkbox"
+                      name="task_description"
+                      onChange={() => handleToggleDetails(index)}
+                    />
+                  </div>
                 </div>
                 <p className="my-1 task-date-mobile">{task.date}</p>
-                <p className="my-1 task-details">{task.details}</p>
+                {task.showDetails && (
+                  <p className="my-1 task-details">{task.details}</p>
+                )}
               </div>
               <input
-                className="form-check-input shadow-none align-self-start"
+                className="form-check-input shadow-none align-self-start my-3"
                 type="checkbox"
                 name="task_status"
-                id={task.task + task.date}
                 checked={task.status} // Checkbox will be checked if status is true
                 onChange={() => handleCheckboxChange(index)} // Toggle status on change
               />
