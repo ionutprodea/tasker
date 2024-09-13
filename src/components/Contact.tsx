@@ -1,7 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const schema = z.object({
   access_key: z.string(),
@@ -20,7 +20,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const Contact = () => {
-  const [result, setResult] = useState("");
+  /*const [result, setResult] = useState("");*/
 
   const {
     register,
