@@ -135,6 +135,10 @@ h1, h2 {
     background-color: var(--primary_color);
 }
 
+.send-confirmation {
+  color: var(--secondary_color);
+}
+
 /* Show Tasks */
 
 .list-group {

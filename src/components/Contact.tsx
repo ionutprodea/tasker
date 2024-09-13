@@ -113,8 +113,12 @@ const Contact = () => {
               Submit
             </button>
           </div>
+          {isSuccess && (
+            <p className="mt-3 d-flex justify-content-center send-confirmation">
+              Message sent
+            </p>
+          )}
         </form>
-        {isSuccess && <p>Message sent</p>}
       </div>
     </>
   );
