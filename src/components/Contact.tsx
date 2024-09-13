@@ -1,7 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const schema = z.object({
   access_key: z.string(),
@@ -20,8 +20,6 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const Contact = () => {
-  /*const [result, setResult] = useState("");*/
-
   const {
     register,
     handleSubmit,
@@ -30,8 +28,7 @@ const Contact = () => {
     control,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onTouched" });
-  /*const [isSuccess, setIsSuccess] = useState(false);
-  const [Message, setMessage] = useState("");*/
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const userName = useWatch({
     control,
@@ -56,18 +53,15 @@ const Contact = () => {
       .then(async (response) => {
         let json = await response.json();
         if (json.success) {
-          /*setIsSuccess(true);
-          setMessage(json.message);*/
+          setIsSuccess(true);
           e.target.reset();
           reset();
-        } /*else {
+        } else {
           setIsSuccess(false);
-          setMessage(json.message);
-        }*/
+        }
       })
       .catch((error) => {
-        /* setIsSuccess(false);
-        setMessage("Client Error. Please check the console.log for more info");*/
+        setIsSuccess(false);
         console.log(error);
       });
   };
@@ -120,6 +114,7 @@ const Contact = () => {
             </button>
           </div>
         </form>
+        {isSuccess && <p>Message sent</p>}
       </div>
     </>
   );
