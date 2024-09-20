@@ -38,7 +38,7 @@ const Contact = () => {
   });
 
   useEffect(() => {
-    setValue("subject", `${userName} sent a message from Website`);
+    setValue("subject", `${userName} sent a message from Tasker`);
   }, [userName, setValue]);
 
   const onSubmit = async (data: FormData, e: any) => {
