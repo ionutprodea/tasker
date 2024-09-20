@@ -29,6 +29,7 @@ const Contact = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onTouched" });
   const [isSuccess, setIsSuccess] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const userName = useWatch({
     control,
@@ -41,6 +42,7 @@ const Contact = () => {
   }, [userName, setValue]);
 
   const onSubmit = async (data: FormData, e: any) => {
+    setSending(true);
     console.log(data);
     await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -54,6 +56,7 @@ const Contact = () => {
         let json = await response.json();
         if (json.success) {
           setIsSuccess(true);
+          setSending(false);
           e.target.reset();
           reset();
         } else {
@@ -113,6 +116,13 @@ const Contact = () => {
               Submit
             </button>
           </div>
+          {sending && (
+            <div className="d-flex justify-content-center mt-3">
+              <div className="spinner-border spinner" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
           {isSuccess && (
             <p className="mt-3 d-flex justify-content-center send-confirmation">
               Message sent
