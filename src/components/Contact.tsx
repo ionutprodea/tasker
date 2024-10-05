@@ -2,6 +2,8 @@ import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const schema = z.object({
   access_key: z.string(),
@@ -71,64 +73,74 @@ const Contact = () => {
 
   return (
     <>
-      <h1 className="m-5">Contact</h1>
-      <div className="m-5 centered-container">
-        <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="hidden"
-            value="b9930498-2649-4f25-aab8-4db0265ed52c"
-            {...register("access_key")}
-          />
-          <input type="hidden" {...register("subject")} />
-          <input
-            {...register("name")}
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Name..."
-            className="form-control mb-4"
-            autoComplete="off"
-          />
-          {errors.name && <p className="form-error">{errors.name.message}</p>}
-          <input
-            {...register("email")}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email..."
-            className="form-control mb-4"
-            autoComplete="off"
-          />
-          {errors.email && <p className="form-error">{errors.email.message}</p>}
-          <textarea
-            {...register("message")}
-            name="message"
-            id="message"
-            placeholder="Message..."
-            className="form-control mb-4 details"
-            autoComplete="off"
-          />
-          {errors.message && (
-            <p className="form-error">{errors.message.message}</p>
-          )}
-          <div className="d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary px-5">
-              Submit
-            </button>
-          </div>
-          {sending && (
-            <div className="d-flex justify-content-center mt-3">
-              <div className="spinner-border spinner" role="status">
-                <span className="visually-hidden">Loading...</span>
+      <div className="app-container d-flex flex-column justify-content-between">
+        <div>
+          <NavBar />
+          <h1 className="m-5">Contact</h1>
+          <div className="m-5 centered-container">
+            <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
+              <input
+                type="hidden"
+                value="b9930498-2649-4f25-aab8-4db0265ed52c"
+                {...register("access_key")}
+              />
+              <input type="hidden" {...register("subject")} />
+              <input
+                {...register("name")}
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Name..."
+                className="form-control mb-4"
+                autoComplete="off"
+              />
+              {errors.name && (
+                <p className="form-error">{errors.name.message}</p>
+              )}
+              <input
+                {...register("email")}
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email..."
+                className="form-control mb-4"
+                autoComplete="off"
+              />
+              {errors.email && (
+                <p className="form-error">{errors.email.message}</p>
+              )}
+              <textarea
+                {...register("message")}
+                name="message"
+                id="message"
+                placeholder="Message..."
+                className="form-control mb-4 details"
+                autoComplete="off"
+              />
+              {errors.message && (
+                <p className="form-error">{errors.message.message}</p>
+              )}
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary px-5">
+                  Submit
+                </button>
               </div>
-            </div>
-          )}
-          {isSuccess && (
-            <p className="mt-3 d-flex justify-content-center send-confirmation">
-              Message sent
-            </p>
-          )}
-        </form>
+              {sending && (
+                <div className="d-flex justify-content-center mt-3">
+                  <div className="spinner-border spinner" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              )}
+              {isSuccess && (
+                <p className="mt-3 d-flex justify-content-center send-confirmation">
+                  Message sent
+                </p>
+              )}
+            </form>
+          </div>
+        </div>
+        <Footer />
       </div>
     </>
   );

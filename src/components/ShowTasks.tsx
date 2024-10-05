@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Task } from "../interfaces/Task";
 import SortTasks from "./SortTasks";
 import { TaskSorter } from "../services/TaskSorter";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -32,48 +34,52 @@ const ShowTasks = () => {
     setTasks(toggledTasks);
   };
   return (
-    <div>
-      <h1 className="m-5">Tasks</h1>
-      <SortTasks onSortChange={setSortOption} />
-      <div className="m-5 centered-container">
-        <ul className="list-group">
-          {tasks.map((task, index) => (
-            <li
-              className="list-group-item d-flex justify-content-between align-items-center"
-              key={task.date + task.task}
-            >
-              <div>
-                <div className="d-flex justify-content-start align-items-center">
-                  <p className="my-1 me-3">{task.task}</p>
-                  <span className={task.importance}>
-                    {task.importance.toUpperCase()}
-                  </span>
-                  <span className="ms-3 task-date">{task.date}</span>
-                  <div className="checkbox-wrapper-50">
-                    <input
-                      className="form-check-input shadow-none align-self-start mx-3 my-2 plus-minus"
-                      type="checkbox"
-                      name="task_description"
-                      onChange={() => handleToggleDetails(index)}
-                    />
+    <div className="app-container d-flex flex-column justify-content-between">
+      <div>
+        <NavBar />
+        <h1 className="m-5">Tasks</h1>
+        <SortTasks onSortChange={setSortOption} />
+        <div className="m-5 centered-container">
+          <ul className="list-group">
+            {tasks.map((task, index) => (
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center"
+                key={task.date + task.task}
+              >
+                <div>
+                  <div className="d-flex justify-content-start align-items-center">
+                    <p className="my-1 me-3">{task.task}</p>
+                    <span className={task.importance}>
+                      {task.importance.toUpperCase()}
+                    </span>
+                    <span className="ms-3 task-date">{task.date}</span>
+                    <div className="checkbox-wrapper-50">
+                      <input
+                        className="form-check-input shadow-none align-self-start mx-3 my-2 plus-minus"
+                        type="checkbox"
+                        name="task_description"
+                        onChange={() => handleToggleDetails(index)}
+                      />
+                    </div>
                   </div>
+                  <p className="my-1 task-date-mobile">{task.date}</p>
+                  {task.showDetails && (
+                    <p className="my-1 task-details">{task.details}</p>
+                  )}
                 </div>
-                <p className="my-1 task-date-mobile">{task.date}</p>
-                {task.showDetails && (
-                  <p className="my-1 task-details">{task.details}</p>
-                )}
-              </div>
-              <input
-                className="form-check-input shadow-none align-self-start my-3"
-                type="checkbox"
-                name="task_status"
-                checked={task.status} // Checkbox will be checked if status is true
-                onChange={() => handleCheckboxChange(index)} // Toggle status on change
-              />
-            </li>
-          ))}
-        </ul>
+                <input
+                  className="form-check-input shadow-none align-self-start my-3"
+                  type="checkbox"
+                  name="task_status"
+                  checked={task.status} // Checkbox will be checked if status is true
+                  onChange={() => handleCheckboxChange(index)} // Toggle status on change
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

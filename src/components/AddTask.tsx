@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const schema = z.object({
   importance: z.string().min(1, { message: "Select importance" }),
@@ -51,64 +53,70 @@ const AddTask = () => {
 
   return (
     <>
-      <h1 className="m-5">Add Tasks</h1>
-      <div className="m-5 centered-container">
-        <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
-          <select
-            {...register("importance")}
-            name="importance"
-            id="importance"
-            className="form-select mb-4"
-          >
-            <option value="">Importance</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-          {errors.importance?.message && (
-            <p className="form-error">{errors.importance.message}</p>
-          )}
-          <input
-            {...register("task")}
-            type="text"
-            name="task"
-            id="task"
-            placeholder="Task..."
-            className="form-control mb-4"
-            autoComplete="off"
-          />
-          {errors.task?.message && (
-            <p className="form-error">{errors.task.message}</p>
-          )}
-          <input
-            {...register("date")}
-            type="text"
-            name="date"
-            id="date"
-            placeholder="Date: __/__/20__"
-            className="form-control mb-4"
-            autoComplete="off"
-          />
-          {errors.date?.message && (
-            <p className="form-error">{errors.date.message}</p>
-          )}
-          <textarea
-            {...register("details")}
-            name="details"
-            id="details"
-            placeholder="Description..."
-            className="form-control mb-4 details"
-            autoComplete="off"
-          />
-          {errors.details?.message && (
-            <p className="form-error">{errors.details.message}</p>
-          )}
-          <div className="d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary px-5">
-              Submit
-            </button>
+      <div className="app-container d-flex flex-column justify-content-between">
+        <div>
+          <NavBar />
+          <h1 className="m-5">Add Tasks</h1>
+          <div className="m-5 centered-container">
+            <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
+              <select
+                {...register("importance")}
+                name="importance"
+                id="importance"
+                className="form-select mb-4"
+              >
+                <option value="">Importance</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+              {errors.importance?.message && (
+                <p className="form-error">{errors.importance.message}</p>
+              )}
+              <input
+                {...register("task")}
+                type="text"
+                name="task"
+                id="task"
+                placeholder="Task..."
+                className="form-control mb-4"
+                autoComplete="off"
+              />
+              {errors.task?.message && (
+                <p className="form-error">{errors.task.message}</p>
+              )}
+              <input
+                {...register("date")}
+                type="text"
+                name="date"
+                id="date"
+                placeholder="Date: __/__/20__"
+                className="form-control mb-4"
+                autoComplete="off"
+              />
+              {errors.date?.message && (
+                <p className="form-error">{errors.date.message}</p>
+              )}
+              <textarea
+                {...register("details")}
+                name="details"
+                id="details"
+                placeholder="Description..."
+                className="form-control mb-4 details"
+                autoComplete="off"
+              />
+              {errors.details?.message && (
+                <p className="form-error">{errors.details.message}</p>
+              )}
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary px-5">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+        <Footer />
       </div>
     </>
   );

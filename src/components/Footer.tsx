@@ -1,48 +1,15 @@
-import { Menu } from "../interfaces/Menu";
+import { Link } from "react-router-dom";
 
-interface Props {
-  onSelectedMenu: (selectedMenu: Menu) => void;
-}
-
-const Footer = ({ onSelectedMenu }: Props) => {
-  const handleMenuClick = (selectedMenu: Menu) => {
-    onSelectedMenu(selectedMenu);
-  };
+const Footer = () => {
   return (
     <div className="footer d-flex align-items-center justify-content-center">
       <div className="centered-container m-5">
-        <a
-          className="nav-link px-4"
-          href="#"
-          onClick={() => {
-            handleMenuClick({
-              home: false,
-              task: false,
-              add: false,
-              delete: false,
-              about: true,
-              contact: false,
-            });
-          }}
-        >
+        <Link to={"/about"} className="nav-link px-4">
           About
-        </a>
-        <a
-          className="nav-link px-4"
-          href="#"
-          onClick={() => {
-            handleMenuClick({
-              home: false,
-              task: false,
-              add: false,
-              delete: false,
-              about: false,
-              contact: true,
-            });
-          }}
-        >
+        </Link>
+        <Link to={"/contact"} className="nav-link px-4">
           Contact
-        </a>
+        </Link>
       </div>
     </div>
   );

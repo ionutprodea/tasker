@@ -1,14 +1,6 @@
-import { Menu } from "../interfaces/Menu";
+import { Link } from "react-router-dom";
 
-interface Props {
-  onSelectedMenu: (selectedMenu: Menu) => void;
-}
-
-const NavBar = ({ onSelectedMenu }: Props) => {
-  const handleMenuClick = (selectedMenu: Menu) => {
-    onSelectedMenu(selectedMenu);
-  };
-
+const NavBar = () => {
   return (
     <>
       <nav
@@ -16,22 +8,9 @@ const NavBar = ({ onSelectedMenu }: Props) => {
         data-bs-theme="dark"
       >
         <div className="container-fluid">
-          <a
-            className="navbar-brand me-5 ms-4"
-            href="#"
-            onClick={() => {
-              handleMenuClick({
-                home: true,
-                task: false,
-                add: false,
-                delete: false,
-                about: false,
-                contact: false,
-              });
-            }}
-          >
+          <Link to={"/"} className="navbar-brand me-5 ms-4">
             TASKER
-          </a>
+          </Link>
           <button
             className="navbar-toggler me-4"
             type="button"
@@ -46,58 +25,19 @@ const NavBar = ({ onSelectedMenu }: Props) => {
           <div className="collapse navbar-collapse ms-4" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item me-3">
-                <a
-                  className="nav-link"
-                  href="#"
-                  onClick={() => {
-                    handleMenuClick({
-                      home: false,
-                      task: true,
-                      add: false,
-                      delete: false,
-                      about: false,
-                      contact: false,
-                    });
-                  }}
-                >
+                <Link to={"/tasks"} className="nav-link">
                   Show Tasks
-                </a>
+                </Link>
               </li>
               <li className="nav-item me-3">
-                <a
-                  className="nav-link"
-                  href="#"
-                  onClick={() => {
-                    handleMenuClick({
-                      home: false,
-                      task: false,
-                      add: true,
-                      delete: false,
-                      about: false,
-                      contact: false,
-                    });
-                  }}
-                >
+                <Link to={"/add"} className="nav-link">
                   Add Tasks
-                </a>
+                </Link>
               </li>
               <li className="nav-item me-3">
-                <a
-                  className="nav-link"
-                  href="#"
-                  onClick={() => {
-                    handleMenuClick({
-                      home: false,
-                      task: false,
-                      add: false,
-                      delete: true,
-                      about: false,
-                      contact: false,
-                    });
-                  }}
-                >
+                <Link to={"/delete"} className="nav-link">
                   Delete Tasks
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
