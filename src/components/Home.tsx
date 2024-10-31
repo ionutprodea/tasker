@@ -27,6 +27,7 @@ const Home = () => {
     );
     setTasks(toggledTasks);
   };
+  const noTasks = tasks.filter((task) => task.date === CurrentDate());
   return (
     <>
       <div className="app-container d-flex flex-column justify-content-between">
@@ -35,6 +36,11 @@ const Home = () => {
           <h1 className="m-5">Today's Tasks</h1>
           <div className="m-5 centered-container">
             <ul className="list-group">
+              {noTasks.length === 0 && (
+                <div className="d-flex justify-content-start align-items-center">
+                  <h2>No tasks for today</h2>
+                </div>
+              )}
               {tasks.map(
                 (task, index) =>
                   task.date == CurrentDate() && (
