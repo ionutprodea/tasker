@@ -41,9 +41,14 @@ const DeleteTask = () => {
       <div>
         <NavBar />
         <h1 className="m-5">Delete Tasks</h1>
-        <SortTasks onSortChange={setSortOption} />
+        {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
         <div className="m-5 centered-container">
           <ul className="list-group">
+            {tasks.length === 0 && (
+              <div className="d-flex justify-content-start align-items-center">
+                <h2>No tasks to show</h2>
+              </div>
+            )}
             {tasks.map((task) => (
               <li
                 className="list-group-item d-flex justify-content-between align-items-center"

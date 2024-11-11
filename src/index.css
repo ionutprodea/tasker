@@ -201,6 +201,15 @@ h1, h2 {
     }
 }
 
+.no-tasks-link {
+  color: var(--secondary_color);
+  transition: all ease-in-out 0.7s;
+  text-decoration: none;
+}
+
+.no-tasks-link:hover{
+  color: var(--primary_color);
+}
 
 /* Footer */
 

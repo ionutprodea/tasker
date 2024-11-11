@@ -3,6 +3,7 @@ import { Task } from "../interfaces/Task";
 import { CurrentDate } from "../services/CurrentDate";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -38,7 +39,14 @@ const Home = () => {
             <ul className="list-group">
               {noTasks.length === 0 && (
                 <div className="d-flex justify-content-start align-items-center">
-                  <h2>No tasks for today</h2>
+                  <div>
+                    <h2>No tasks today</h2>
+                    <h2>
+                      <Link to={"/add"} className="no-tasks-link">
+                        Click here to add task
+                      </Link>
+                    </h2>
+                  </div>
                 </div>
               )}
               {tasks.map(

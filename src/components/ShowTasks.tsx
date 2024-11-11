@@ -4,6 +4,7 @@ import SortTasks from "./SortTasks";
 import { TaskSorter } from "../services/TaskSorter";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -38,9 +39,21 @@ const ShowTasks = () => {
       <div>
         <NavBar />
         <h1 className="m-5">Tasks</h1>
-        <SortTasks onSortChange={setSortOption} />
+        {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
         <div className="m-5 centered-container">
           <ul className="list-group">
+            {tasks.length === 0 && (
+              <div className="d-flex justify-content-start align-items-center">
+                <div>
+                  <h2>No tasks to show</h2>
+                  <h2>
+                    <Link to={"/add"} className="no-tasks-link">
+                      Click here to add task
+                    </Link>
+                  </h2>
+                </div>
+              </div>
+            )}
             {tasks.map((task, index) => (
               <li
                 className="list-group-item d-flex justify-content-between align-items-center"
