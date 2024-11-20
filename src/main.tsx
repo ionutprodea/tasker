@@ -10,10 +10,12 @@ import DeleteTask from "./components/DeleteTask.tsx";
 import About from "./components/About.tsx";
 import Contact from "./components/Contact.tsx";
 import ShowTasks from "./components/ShowTasks.tsx";
+import ErrorPage from "./components/ErrorPage.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/add",
