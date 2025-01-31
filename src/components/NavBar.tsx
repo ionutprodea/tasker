@@ -8,7 +8,7 @@ const NavBar = () => {
         data-bs-theme="dark"
       >
         <div className="container-fluid">
-          <Link to={"/"} className="navbar-brand me-5 ms-4">
+          <Link to={"/"} className="navbar-brand me-5 ms-4 nav-link">
             TASKER
           </Link>
           <button

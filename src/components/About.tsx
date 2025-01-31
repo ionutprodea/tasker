@@ -20,7 +20,7 @@ const About = () => {
               It is built with a mobile-first approach, Tasker is fully
               responsive, offering a seamless experience on small and medium
               display devices. The interface may feel a bit minimal on larger
-              screens
+              screens.
             </p>
             <p className="text mb-4">
               As a frontend-only application, Tasker stores task entries locally
