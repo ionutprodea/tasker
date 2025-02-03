@@ -202,13 +202,13 @@ h1, h2 {
 }
 
 .no-tasks-link {
-  color: var(--secondary_color);
+  color: var(--primary_color);
   transition: all ease-in-out 0.7s;
   text-decoration: none;
 }
 
 .no-tasks-link:hover{
-  color: var(--primary_color);
+  color: var(--secondary_color);
 }
 
 /* Footer */
@@ -218,6 +218,7 @@ h1, h2 {
     height: 60px;
     opacity: 30%;
 }
+
 
 /* Custom checkbox */
 
