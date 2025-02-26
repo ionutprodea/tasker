@@ -4,6 +4,7 @@ import { CurrentDate } from "../services/CurrentDate";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -31,6 +32,18 @@ const Home = () => {
   const noTasks = tasks.filter((task) => task.date === CurrentDate());
   return (
     <>
+      <Helmet>
+        <title>Tasker</title>
+        <meta
+          name="description"
+          content="Tasker is a simple and efficient to-do app designed to help you organize tasks, boost productivity, and stay on top of your daily plans.
+           Manage tasks effortlessly with an intuitive interface."
+        />
+        <meta
+          name="keywords"
+          content="Tasker To-Do App, Simple To-Do App, Task Management App"
+        />
+      </Helmet>
       <div className="app-container d-flex flex-column justify-content-between">
         <div>
           <NavBar />
