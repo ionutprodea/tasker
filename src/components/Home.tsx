@@ -34,8 +34,14 @@ const Home = () => {
     <>
       <Helmet>
         <title>Tasker</title>
+        <meta property="og:title" content="Tasker" />
         <meta
           name="description"
+          content="Tasker is a simple and efficient to-do app designed to help you organize tasks, boost productivity, and stay on top of your daily plans.
+           Manage tasks effortlessly with an intuitive interface."
+        />
+        <meta
+          property="og:description"
           content="Tasker is a simple and efficient to-do app designed to help you organize tasks, boost productivity, and stay on top of your daily plans.
            Manage tasks effortlessly with an intuitive interface."
         />
@@ -43,6 +49,11 @@ const Home = () => {
           name="keywords"
           content="Tasker To-Do App, Simple To-Do App, Task Management App"
         />
+        <meta
+          property="og:keywords"
+          content="Tasker To-Do App, Simple To-Do App, Task Management App"
+        />
+        <meta property="og:type" content="website" />
       </Helmet>
       <div className="app-container d-flex flex-column justify-content-between">
         <div>

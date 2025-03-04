@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { Helmet } from "react-helmet";
 
 const schema = z.object({
   importance: z.string().min(1, { message: "Select importance" }),
@@ -53,6 +54,27 @@ const AddTask = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Add Task</title>
+        <meta property="og:title" content="Add Task" />
+        <meta
+          name="description"
+          content="Easily add new tasks to your to-do list with Tasker. Stay organized and boost productivity by managing your daily tasks effortlessly."
+        />
+        <meta
+          property="og:description"
+          content="Easily add new tasks to your to-do list with Tasker. Stay organized and boost productivity by managing your daily tasks effortlessly."
+        />
+        <meta
+          name="keywords"
+          content="Add Task in Tasker, Simple To-Do App, Task Management App"
+        />
+        <meta
+          property="og:keywords"
+          content="Add Task in Tasker, Simple To-Do App, Task Management App"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="app-container d-flex flex-column justify-content-between">
         <div>
           <NavBar />

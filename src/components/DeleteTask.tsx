@@ -4,6 +4,7 @@ import { TaskSorter } from "../services/TaskSorter";
 import SortTasks from "./SortTasks";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { Helmet } from "react-helmet";
 
 const DeleteTask = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -37,43 +38,66 @@ const DeleteTask = () => {
   };
 
   return (
-    <div className="app-container d-flex flex-column justify-content-between">
-      <div>
-        <NavBar />
-        <h1 className="m-5">Delete Tasks</h1>
-        {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
-        <div className="m-5 centered-container">
-          <ul className="list-group">
-            {tasks.length === 0 && (
-              <div className="d-flex justify-content-start align-items-center">
-                <h2>No tasks to show</h2>
-              </div>
-            )}
-            {tasks.map((task) => (
-              <li
-                className="list-group-item d-flex justify-content-between align-items-center"
-                key={task.date + task.task}
-              >
+    <>
+      <Helmet>
+        <title>Delete Task</title>
+        <meta property="og:title" content="Delete Task" />
+        <meta
+          name="description"
+          content="Easily remove completed or unnecessary tasks in Tasker. Keep your to-do list clean and organized with a simple task deletion process."
+        />
+        <meta
+          property="og:description"
+          content="Easily remove completed or unnecessary tasks in Tasker. Keep your to-do list clean and organized with a simple task deletion process."
+        />
+        <meta
+          name="keywords"
+          content="Delete Task in Tasker, Task Management Cleanup, Remove Tasks"
+        />
+        <meta
+          property="og:keywords"
+          content="Delete Task in Tasker, Task Management Cleanup, Remove Tasks"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <div className="app-container d-flex flex-column justify-content-between">
+        <div>
+          <NavBar />
+          <h1 className="m-5">Delete Tasks</h1>
+          {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
+          <div className="m-5 centered-container">
+            <ul className="list-group">
+              {tasks.length === 0 && (
                 <div className="d-flex justify-content-start align-items-center">
-                  <p className="my-1 me-3">{task.task}</p>
-                  <span className={task.importance}>
-                    {task.importance.toUpperCase()}
-                  </span>
-                  <span className="ms-3 task-date">{task.date}</span>
+                  <h2>No tasks to show</h2>
                 </div>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => onRemove(task.date, task.task)}
+              )}
+              {tasks.map((task) => (
+                <li
+                  className="list-group-item d-flex justify-content-between align-items-center"
+                  key={task.date + task.task}
                 >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
+                  <div className="d-flex justify-content-start align-items-center">
+                    <p className="my-1 me-3">{task.task}</p>
+                    <span className={task.importance}>
+                      {task.importance.toUpperCase()}
+                    </span>
+                    <span className="ms-3 task-date">{task.date}</span>
+                  </div>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => onRemove(task.date, task.task)}
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

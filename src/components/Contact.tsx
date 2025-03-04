@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { Helmet } from "react-helmet";
 
 const schema = z.object({
   access_key: z.string(),
@@ -73,6 +74,27 @@ const Contact = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Contact Tasker</title>
+        <meta property="og:title" content="Contact Tasker" />
+        <meta
+          name="description"
+          content="Get in touch with Tasker! Send us a message with your questions, feedback, or suggestions—we’d love to hear from you."
+        />
+        <meta
+          property="og:description"
+          content="Get in touch with Tasker! Send us a message with your questions, feedback, or suggestions—we’d love to hear from you."
+        />
+        <meta
+          name="keywords"
+          content="Contact Tasker, Send a Message to Tasker, Reach Out to Tasker"
+        />
+        <meta
+          property="og:keywords"
+          content="Contact Tasker, Send a Message to Tasker, Reach Out to Tasker"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="app-container d-flex flex-column justify-content-between">
         <div>
           <NavBar />
