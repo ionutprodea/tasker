@@ -40,8 +40,8 @@ const DeleteTask = () => {
   return (
     <>
       <Helmet>
-        <title>Delete Task</title>
-        <meta property="og:title" content="Delete Task" />
+        <title>Delete Tasks</title>
+        <meta property="og:title" content="Delete Tasks" />
         <meta
           name="description"
           content="Easily remove completed or unnecessary tasks in Tasker. Keep your to-do list clean and organized with a simple task deletion process."

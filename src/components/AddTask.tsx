@@ -55,8 +55,8 @@ const AddTask = () => {
   return (
     <>
       <Helmet>
-        <title>Add Task</title>
-        <meta property="og:title" content="Add Task" />
+        <title>Add Tasks</title>
+        <meta property="og:title" content="Add Tasks" />
         <meta
           name="description"
           content="Easily add new tasks to your to-do list with Tasker. Stay organized and boost productivity by managing your daily tasks effortlessly."
