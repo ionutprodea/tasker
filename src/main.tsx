@@ -11,6 +11,7 @@ import About from "./components/About.tsx";
 import Contact from "./components/Contact.tsx";
 import ShowTasks from "./components/ShowTasks.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
+import Login from "./components/Login.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/tasks",
     element: <ShowTasks />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
