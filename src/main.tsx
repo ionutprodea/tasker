@@ -12,6 +12,7 @@ import Contact from "./components/Contact.tsx";
 import ShowTasks from "./components/ShowTasks.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
 import Login from "./components/Login.tsx";
+import Register from "./components/Register.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 

@@ -5,19 +5,30 @@ import axios from "axios";
 import { useState } from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "../services/apiEndpoint";
 
 const schema = z.object({
-  email: z.string().email({ message: "Invalid email adress" }).min(5).max(75),
-  password: z.string().min(6, { message: "Password is required" }).max(255),
+  username: z
+    .string()
+    .min(5, { message: "Username must have at least 5 characters" })
+    .max(75, { message: "Username maximum length is 75 characters" }),
+  email: z
+    .string()
+    .email({ message: "Invalid email adress" })
+    .min(5)
+    .max(75, { message: "Email adreess maximum length is 75" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long" })
+    .max(255),
 });
 
 type FormData = z.infer<typeof schema>;
 
-const Login = () => {
-  const [logging, setLogging] = useState(false);
-  const [failedLogin, setFailedLogin] = useState("");
+const Register = () => {
+  const [registering, setRegistering] = useState(false);
+  const [failedRegistering, setFailedRegistering] = useState("");
   const navigate = useNavigate();
   const {
     register,
@@ -27,9 +38,10 @@ const Login = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const onSubmit = (data: FormData) => {
     console.log(data);
-    setLogging(true);
+    setRegistering(true);
     axios
-      .post(`${API_URL}/auth`, {
+      .post(`${API_URL}/users`, {
+        username: data.username,
         email: data.email,
         password: data.password,
       })
@@ -37,19 +49,18 @@ const Login = () => {
         console.log(response);
         sessionStorage.setItem("tasker-auth-token", response.data);
         navigate("/");
-        setLogging(false);
-        setFailedLogin("");
+        setRegistering(false);
+        setFailedRegistering("");
       })
       .catch((error) => {
-        setLogging(false);
         if (error.response) {
-          setFailedLogin(error.response.data);
+          setFailedRegistering(error.response.data);
         } else if (error.request) {
-          setFailedLogin("No response from server");
+          setFailedRegistering("No response from server");
         } else {
-          setFailedLogin("Unexpected error. Please try again");
+          setFailedRegistering("Unexpected error. Please try again");
         }
-        console.error("Login failed:", error.response.data);
+        console.error("Registration failed:", error.response.data);
       });
     reset();
   };
@@ -57,11 +68,25 @@ const Login = () => {
     <div className="app-container d-flex flex-column justify-content-between">
       <div>
         <NavBar />
-        <h1 className="m-5">Login</h1>
-        {!logging && (
+        <h1 className="m-5">Register</h1>
+        {!registering && (
           <div className="m-5 centered-container">
             <form className="login" onSubmit={handleSubmit(onSubmit)}>
-              {failedLogin && <p className="form-error">{failedLogin}</p>}
+              {failedRegistering && (
+                <p className="form-error">{failedRegistering}</p>
+              )}
+              <input
+                {...register("username")}
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Username..."
+                className="form-control mb-4"
+                autoComplete="off"
+              />
+              {errors.username?.message && (
+                <p className="form-error">{errors.username.message}</p>
+              )}
               <input
                 {...register("email")}
                 type="text"
@@ -94,18 +119,10 @@ const Login = () => {
             </form>
           </div>
         )}
-        <div className="centered-container">
-          <p className="text">
-            Don't have an account?{" "}
-            <Link to={"/register"} className="no-tasks-link fw-semibold">
-              Register here!
-            </Link>
-          </p>
-        </div>
-        {logging && (
+        {registering && (
           <div className="m-5 centered-container">
             <div className="spinner-border spinner" role="status">
-              <span className="visually-hidden">Logging...</span>
+              <span className="visually-hidden">Registering...</span>
             </div>
           </div>
         )}
@@ -115,4 +132,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
