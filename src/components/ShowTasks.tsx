@@ -6,20 +6,37 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import { API_URL } from "../services/apiEndpoint";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [sortOption, setSortOption] = useState("high-low");
 
   // Load tasks from localStorage
-  useEffect(() => {
+  /*useEffect(() => {
     const storedTasks = localStorage.getItem("TASKER_TASKS");
     if (storedTasks) {
       const parsedTasks = JSON.parse(storedTasks);
       const sortedTasks = TaskSorter(sortOption, parsedTasks);
       sortedTasks && setTasks(sortedTasks);
     }
-  }, [sortOption]);
+  }, [sortOption]);*/
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/tasks`, {
+        headers: {
+          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setTasks(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   // Saves tasks status to localStorage everytime a checkbox is checked/unchecked
   const handleCheckboxChange = (index: number) => {
     const updatedTasks = tasks.map((task, i) =>
