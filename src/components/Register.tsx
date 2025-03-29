@@ -11,7 +11,7 @@ import { API_URL } from "../services/apiEndpoint";
 const schema = z.object({
   username: z
     .string()
-    .min(5, { message: "Username must have at least 5 characters" })
+    .min(5, { message: "Username minimum length is 5 characters" })
     .max(75, { message: "Username maximum length is 75 characters" }),
   email: z
     .string()
@@ -104,7 +104,7 @@ const Register = () => {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Password"
+                placeholder="Password..."
                 className="form-control mb-4"
                 autoComplete="off"
               />

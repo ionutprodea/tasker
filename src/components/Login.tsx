@@ -58,6 +58,7 @@ const Login = () => {
       <div>
         <NavBar />
         <h1 className="m-5">Login</h1>
+        <p className="text">You are not logged in. Please log in.</p>
         {!logging && (
           <div className="m-5 centered-container">
             <form className="login" onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +80,7 @@ const Login = () => {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Password"
+                placeholder="Password..."
                 className="form-control mb-4"
                 autoComplete="off"
               />
