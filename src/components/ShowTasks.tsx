@@ -36,21 +36,20 @@ const ShowTasks = () => {
     }
   }, [tasks, sortOption]);
   // Saves tasks status to localStorage everytime a checkbox is checked/unchecked
-  /*const handleCheckboxChange = (index: number) => {
+  /* const handleCheckboxChange = (index: number) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, status: !task.status } : task
     );
 
     setTasks(updatedTasks);
     localStorage.setItem("TASKER_TASKS", JSON.stringify(updatedTasks));
-  };
+  };*/
   const handleToggleDetails = (index: number) => {
     const toggledTasks = sortedTasks.map((task, i) =>
       i === index ? { ...task, showDetails: !task.showDetails } : task
     );
     setTasks(toggledTasks);
   };
-  */
   return (
     <>
       <Helmet>

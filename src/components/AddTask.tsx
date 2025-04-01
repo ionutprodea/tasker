@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import { API_URL } from "../services/apiEndpoint";
 
 const schema = z.object({
   importance: z.string().min(1, { message: "Select importance" }),
@@ -24,21 +26,10 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const AddTask = () => {
-  const [tasks, setTasks] = useState<FormData[]>([]);
+  const [postingTask, setPostingTask] = useState(false);
+  const [taskAdded, setTaskAdded] = useState(false);
 
-  // Load tasks from localStorage when the component mounts
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("TASKER_TASKS");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []); // Empty dependency array means this effect runs once when the component mounts
-
-  // Save tasks to localStorage whenever tasks state changes
-  useEffect(() => {
-    localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
-  }, [tasks]);
-
+  useEffect(() => {});
   const {
     register,
     handleSubmit,
@@ -48,7 +39,21 @@ const AddTask = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data);
-    setTasks((tasks) => [...tasks, data]);
+    setPostingTask(true);
+    axios
+      .post(`${API_URL}/tasks`, data, {
+        headers: {
+          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+        },
+      })
+      .then((response) => {
+        console.log("Task added", response.data);
+        setPostingTask(false);
+        setTaskAdded(true);
+      })
+      .catch((error) => {
+        console.log(error.response?.data || error.message);
+      });
     reset();
   };
 
@@ -79,64 +84,74 @@ const AddTask = () => {
         <div>
           <NavBar />
           <h1 className="m-5">Add Tasks</h1>
-          <div className="m-5 centered-container">
-            <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
-              <select
-                {...register("importance")}
-                name="importance"
-                id="importance"
-                className="form-select mb-4"
-              >
-                <option value="">Importance</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-              </select>
-              {errors.importance?.message && (
-                <p className="form-error">{errors.importance.message}</p>
-              )}
-              <input
-                {...register("task")}
-                type="text"
-                name="task"
-                id="task"
-                placeholder="Task..."
-                className="form-control mb-4"
-                autoComplete="off"
-              />
-              {errors.task?.message && (
-                <p className="form-error">{errors.task.message}</p>
-              )}
-              <input
-                {...register("date")}
-                type="text"
-                name="date"
-                id="date"
-                placeholder="Date: __/__/20__"
-                className="form-control mb-4"
-                autoComplete="off"
-              />
-              {errors.date?.message && (
-                <p className="form-error">{errors.date.message}</p>
-              )}
-              <textarea
-                {...register("details")}
-                name="details"
-                id="details"
-                placeholder="Description..."
-                className="form-control mb-4 details"
-                autoComplete="off"
-              />
-              {errors.details?.message && (
-                <p className="form-error">{errors.details.message}</p>
-              )}
-              <div className="d-flex justify-content-center">
-                <button type="submit" className="btn btn-primary px-5">
-                  Submit
-                </button>
+          {taskAdded && <p className="text">Task uploaded to database</p>}
+          {!postingTask && (
+            <div className="m-5 centered-container">
+              <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
+                <select
+                  {...register("importance")}
+                  name="importance"
+                  id="importance"
+                  className="form-select mb-4"
+                >
+                  <option value="">Importance</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+                {errors.importance?.message && (
+                  <p className="form-error">{errors.importance.message}</p>
+                )}
+                <input
+                  {...register("task")}
+                  type="text"
+                  name="task"
+                  id="task"
+                  placeholder="Task..."
+                  className="form-control mb-4"
+                  autoComplete="off"
+                />
+                {errors.task?.message && (
+                  <p className="form-error">{errors.task.message}</p>
+                )}
+                <input
+                  {...register("date")}
+                  type="text"
+                  name="date"
+                  id="date"
+                  placeholder="Date: __/__/20__"
+                  className="form-control mb-4"
+                  autoComplete="off"
+                />
+                {errors.date?.message && (
+                  <p className="form-error">{errors.date.message}</p>
+                )}
+                <textarea
+                  {...register("details")}
+                  name="details"
+                  id="details"
+                  placeholder="Description..."
+                  className="form-control mb-4 details"
+                  autoComplete="off"
+                />
+                {errors.details?.message && (
+                  <p className="form-error">{errors.details.message}</p>
+                )}
+                <div className="d-flex justify-content-center">
+                  <button type="submit" className="btn btn-primary px-5">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+          {postingTask && (
+            <div className="m-5 centered-container">
+              <div className="spinner-border spinner" role="status">
+                <span className="visually-hidden">Posting...</span>
               </div>
-            </form>
-          </div>
+            </div>
+          )}
         </div>
         <Footer />
       </div>
