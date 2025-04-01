@@ -5,31 +5,44 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import { API_URL } from "../services/apiEndpoint";
+import { TaskSorter } from "../services/TaskSorter";
+import SortTasks from "./SortTasks";
 
 const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [sortOption, setSortOption] = useState("high-low");
+  const [sortedTasks, setSortedTasks] = useState<Task[]>([]);
 
-  // Load tasks from localStorage
   useEffect(() => {
-    const storedTasks = localStorage.getItem("TASKER_TASKS");
-    storedTasks && setTasks(JSON.parse(storedTasks));
+    axios
+      .get(`${API_URL}/tasks`, {
+        headers: {
+          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setTasks(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-  // Saves tasks status to localStorage everytime a checkbox is checked/unchecked
-  const handleCheckboxChange = (index: number) => {
-    const updatedTasks = tasks.map((task, i) =>
-      i === index ? { ...task, status: !task.status } : task
-    );
-
-    setTasks(updatedTasks);
-    localStorage.setItem("TASKER_TASKS", JSON.stringify(updatedTasks));
-  };
+  useEffect(() => {
+    if (tasks) {
+      const sorted = TaskSorter(sortOption, tasks) || [];
+      setSortedTasks(sorted);
+    }
+  }, [tasks, sortOption]);
   const handleToggleDetails = (index: number) => {
     const toggledTasks = tasks.map((task, i) =>
       i === index ? { ...task, showDetails: !task.showDetails } : task
     );
     setTasks(toggledTasks);
   };
-  const noTasks = tasks.filter((task) => task.date === CurrentDate());
+  const noTasks = sortedTasks.filter((task) => task.date === CurrentDate());
   return (
     <>
       <Helmet>
@@ -59,6 +72,7 @@ const Home = () => {
         <div>
           <NavBar />
           <h1 className="m-5">Today's Tasks</h1>
+          {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
           <div className="m-5 centered-container">
             <ul className="list-group">
               {noTasks.length === 0 && (

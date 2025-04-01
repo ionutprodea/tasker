@@ -12,16 +12,8 @@ import { API_URL } from "../services/apiEndpoint";
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [sortOption, setSortOption] = useState("high-low");
+  const [sortedTasks, setSortedTasks] = useState<Task[]>([]);
 
-  // Load tasks from localStorage
-  /*useEffect(() => {
-    const storedTasks = localStorage.getItem("TASKER_TASKS");
-    if (storedTasks) {
-      const parsedTasks = JSON.parse(storedTasks);
-      const sortedTasks = TaskSorter(sortOption, parsedTasks);
-      sortedTasks && setTasks(sortedTasks);
-    }
-  }, [sortOption]);*/
   useEffect(() => {
     axios
       .get(`${API_URL}/tasks`, {
@@ -37,8 +29,14 @@ const ShowTasks = () => {
         console.log(error);
       });
   }, []);
+  useEffect(() => {
+    if (tasks) {
+      const sorted = TaskSorter(sortOption, tasks) || [];
+      setSortedTasks(sorted);
+    }
+  }, [tasks, sortOption]);
   // Saves tasks status to localStorage everytime a checkbox is checked/unchecked
-  const handleCheckboxChange = (index: number) => {
+  /*const handleCheckboxChange = (index: number) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, status: !task.status } : task
     );
@@ -47,11 +45,12 @@ const ShowTasks = () => {
     localStorage.setItem("TASKER_TASKS", JSON.stringify(updatedTasks));
   };
   const handleToggleDetails = (index: number) => {
-    const toggledTasks = tasks.map((task, i) =>
+    const toggledTasks = sortedTasks.map((task, i) =>
       i === index ? { ...task, showDetails: !task.showDetails } : task
     );
     setTasks(toggledTasks);
   };
+  */
   return (
     <>
       <Helmet>
@@ -94,7 +93,7 @@ const ShowTasks = () => {
                   </div>
                 </div>
               )}
-              {tasks.map((task, index) => (
+              {sortedTasks.map((task, index) => (
                 <li
                   className="list-group-item d-flex justify-content-between align-items-center"
                   key={task.date + task.task}
