@@ -119,7 +119,7 @@ const Home = () => {
                         className="form-check-input shadow-none align-self-start my-3"
                         type="checkbox"
                         name="task_status"
-                        checked={task.status} // Checkbox will be checked if status is true
+                        checked={task.checked} // Checkbox will be checked if status is true
                         onChange={() => handleCheckboxChange(index)} // Toggle status on change
                       />
                     </li>
