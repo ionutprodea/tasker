@@ -28,6 +28,7 @@ type FormData = z.infer<typeof schema>;
 const AddTask = () => {
   const [postingTask, setPostingTask] = useState(false);
   const [taskAdded, setTaskAdded] = useState(false);
+  const [addError, setAddError] = useState("");
 
   useEffect(() => {});
   const {
@@ -52,7 +53,11 @@ const AddTask = () => {
         setTaskAdded(true);
       })
       .catch((error) => {
+        setPostingTask(false);
         console.log(error.response?.data || error.message);
+        if (error.response) setAddError(error.response.data);
+        else if (error.request) setAddError("No response from the server");
+        else setAddError("Unexpected error. Please try again");
       });
     reset();
   };
@@ -88,6 +93,7 @@ const AddTask = () => {
           {!postingTask && (
             <div className="m-5 centered-container">
               <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
+                {addError && <p className="form-error">{addError}</p>}
                 <select
                   {...register("importance")}
                   name="importance"
