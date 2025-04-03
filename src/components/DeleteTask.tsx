@@ -13,6 +13,7 @@ const DeleteTask = () => {
   const [sortOption, setSortOption] = useState("high-low");
   const [sortedTasks, setSortedTasks] = useState<Task[]>([]);
   const [removedTask, setRemovedTask] = useState(false);
+  const [removing, setRemoving] = useState(false);
   const [deleteError, setDeleteError] = useState("");
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const DeleteTask = () => {
   }, [tasks, sortOption]);
 
   const onRemove = (_id: string) => {
-    setRemovedTask(true);
+    setRemoving(true);
     axios
       .delete(`${API_URL}/tasks/${_id}`, {
         headers: {
@@ -47,14 +48,15 @@ const DeleteTask = () => {
       })
       .then((response) => {
         console.log(`Removing task with ID: ${response.data._id}`);
-        setRemovedTask(false);
+        setRemoving(false);
+        setRemovedTask(true);
       })
       .catch((error) => {
         console.log(error.response?.data || error.message);
         if (error.response) setDeleteError(error.response.data);
         else if (error.request) setDeleteError("No response from the server");
         else setDeleteError("Unexpected error. Please try again");
-        setRemovedTask(false);
+        setRemoving(false);
       });
   };
 
@@ -86,7 +88,8 @@ const DeleteTask = () => {
           <NavBar />
           <h1 className="m-5">Delete Tasks</h1>
           {deleteError && <p className="text">{deleteError}</p>}
-          {!removedTask && (
+          {removedTask && <p className="text">Task deleted from database</p>}
+          {!removing && (
             <div>
               {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
               <div className="m-5 centered-container">
@@ -120,10 +123,10 @@ const DeleteTask = () => {
               </div>
             </div>
           )}
-          {removedTask && (
+          {removing && (
             <div className="m-5 centered-container">
               <div className="spinner-border spinner" role="status">
-                <span className="visually-hidden">Removing...</span>
+                <span className="visually-hidden">Deleting...</span>
               </div>
             </div>
           )}
