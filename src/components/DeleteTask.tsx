@@ -5,36 +5,57 @@ import SortTasks from "./SortTasks";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import { API_URL } from "../services/apiEndpoint";
 
 const DeleteTask = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [sortOption, setSortOption] = useState("high-low");
+  const [sortedTasks, setSortedTasks] = useState<Task[]>([]);
+  const [removedTask, setRemovedTask] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
 
-  // Load tasks from localStorage
   useEffect(() => {
-    const storedTasks = localStorage.getItem("TASKER_TASKS");
-    if (storedTasks) {
-      const parsedTasks = JSON.parse(storedTasks);
-      const sortedTasks = TaskSorter(sortOption, parsedTasks);
-      sortedTasks && setTasks(sortedTasks);
-    }
-  }, [sortOption]);
-
-  // Save tasks to localStorage whenever the tasks state changes
-  useEffect(() => {
-    window.localStorage.setItem("TASKER_TASKS", JSON.stringify(tasks));
-  }, [tasks]);
-
-  // Function to remove a task
-  const onRemove = (date: string, name: string) => {
-    console.log("Removing task:", name, date);
-    setTasks((prevTasks) =>
-      prevTasks.filter((task) => {
-        const shouldRemove = task.task === name && task.date === date;
-        console.log("Task:", task, "Remove:", shouldRemove);
-        return !shouldRemove;
+    axios
+      .get(`${API_URL}/tasks`, {
+        headers: {
+          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+        },
       })
-    );
+      .then((response) => {
+        console.log(response);
+        setTasks(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [removedTask]);
+  useEffect(() => {
+    if (tasks) {
+      const sorted = TaskSorter(sortOption, tasks) || [];
+      setSortedTasks(sorted);
+    }
+  }, [tasks, sortOption]);
+
+  const onRemove = (_id: string) => {
+    setRemovedTask(true);
+    axios
+      .delete(`${API_URL}/tasks/${_id}`, {
+        headers: {
+          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+        },
+      })
+      .then((response) => {
+        console.log(`Removing task with ID: ${response.data._id}`);
+        setRemovedTask(false);
+      })
+      .catch((error) => {
+        console.log(error.response?.data || error.message);
+        if (error.response) setDeleteError(error.response.data);
+        else if (error.request) setDeleteError("No response from the server");
+        else setDeleteError("Unexpected error. Please try again");
+        setRemovedTask(false);
+      });
   };
 
   return (
@@ -64,36 +85,48 @@ const DeleteTask = () => {
         <div>
           <NavBar />
           <h1 className="m-5">Delete Tasks</h1>
-          {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
-          <div className="m-5 centered-container">
-            <ul className="list-group">
-              {tasks.length === 0 && (
-                <div className="d-flex justify-content-start align-items-center">
-                  <h2>No tasks to show</h2>
-                </div>
-              )}
-              {tasks.map((task) => (
-                <li
-                  className="list-group-item d-flex justify-content-between align-items-center"
-                  key={task.date + task.task}
-                >
-                  <div className="d-flex justify-content-start align-items-center">
-                    <p className="my-1 me-3">{task.task}</p>
-                    <span className={task.importance}>
-                      {task.importance.toUpperCase()}
-                    </span>
-                    <span className="ms-3 task-date">{task.date}</span>
-                  </div>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => onRemove(task.date, task.task)}
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {deleteError && <p className="text">{deleteError}</p>}
+          {!removedTask && (
+            <div>
+              {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
+              <div className="m-5 centered-container">
+                <ul className="list-group">
+                  {tasks.length === 0 && (
+                    <div className="d-flex justify-content-start align-items-center">
+                      <h2>No tasks to show</h2>
+                    </div>
+                  )}
+                  {sortedTasks.map((task) => (
+                    <li
+                      className="list-group-item d-flex justify-content-between align-items-center"
+                      key={task.date + task.task}
+                    >
+                      <div className="d-flex justify-content-start align-items-center">
+                        <p className="my-1 me-3">{task.task}</p>
+                        <span className={task.importance}>
+                          {task.importance.toUpperCase()}
+                        </span>
+                        <span className="ms-3 task-date">{task.date}</span>
+                      </div>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => onRemove(task._id)}
+                      >
+                        Remove
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
+          {removedTask && (
+            <div className="m-5 centered-container">
+              <div className="spinner-border spinner" role="status">
+                <span className="visually-hidden">Removing...</span>
+              </div>
+            </div>
+          )}
         </div>
         <Footer />
       </div>

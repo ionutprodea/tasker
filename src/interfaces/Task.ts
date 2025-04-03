@@ -3,6 +3,7 @@ export interface Task {
     task: string;
     date: string;
     details: string;
-    status: boolean;
     showDetails: boolean;
+    checked: boolean;
+    _id: string;
   }
