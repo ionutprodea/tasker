@@ -14,8 +14,37 @@ const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [sortOption, setSortOption] = useState("high-low");
   const [sortedTasks, setSortedTasks] = useState<Task[]>([]);
+  const [updatingTask, setUpdatingTask] = useState(false);
+  const [loadingTasks, setLoadingTasks] = useState(false);
+
+  const handleCheckboxChange = (task: Task) => {
+    const updatedTask = { ...task, checked: !task.checked };
+    setUpdatingTask(true);
+    axios
+      .put(
+        `${API_URL}/tasks/${task._id}`,
+        { checked: updatedTask.checked },
+        {
+          headers: {
+            "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Task updated:", response.data);
+        const updatedTasks = tasks.map((t) =>
+          t._id === task._id ? { ...t, checked: updatedTask.checked } : t
+        );
+        setTasks(updatedTasks);
+        setUpdatingTask(false);
+      })
+      .catch((error) => {
+        console.log("Error updating task:", error);
+      });
+  };
 
   useEffect(() => {
+    setLoadingTasks(true);
     axios
       .get(`${API_URL}/tasks`, {
         headers: {
@@ -25,6 +54,7 @@ const Home = () => {
       .then((response) => {
         console.log(response);
         setTasks(response.data);
+        setLoadingTasks(false);
       })
       .catch((error) => {
         console.log(error);
@@ -36,6 +66,7 @@ const Home = () => {
       setSortedTasks(sorted);
     }
   }, [tasks, sortOption]);
+
   const handleToggleDetails = (index: number) => {
     const toggledTasks = tasks.map((task, i) =>
       i === index ? { ...task, showDetails: !task.showDetails } : task
@@ -72,10 +103,17 @@ const Home = () => {
         <div>
           <NavBar />
           <h1 className="m-5">Today's Tasks</h1>
-          {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
+          {(updatingTask || loadingTasks) && (
+            <div className="m-5 centered-container">
+              <div className="spinner-border spinner" role="status">
+                <span className="visually-hidden">Updating...</span>
+              </div>
+            </div>
+          )}
+          {noTasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
           <div className="m-5 centered-container">
             <ul className="list-group">
-              {noTasks.length === 0 && (
+              {noTasks.length === 0 && !loadingTasks && (
                 <div className="d-flex justify-content-start align-items-center">
                   <div>
                     <h2>No tasks today</h2>
@@ -119,8 +157,8 @@ const Home = () => {
                         className="form-check-input shadow-none align-self-start my-3"
                         type="checkbox"
                         name="task_status"
-                        checked={task.checked} // Checkbox will be checked if status is true
-                        onChange={() => handleCheckboxChange(index)} // Toggle status on change
+                        checked={task.checked}
+                        onChange={() => handleCheckboxChange(task)}
                       />
                     </li>
                   )
