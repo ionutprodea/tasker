@@ -191,6 +191,12 @@ h1, h2 {
     display: none;
 }
 
+.finished-task {
+  position: relative;
+  color: #07d600;
+  bottom: 2px;
+}
+
 @media screen and (min-width: 768px) {
     .task-date {
         display: block;

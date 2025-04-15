@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { API_URL } from "../services/apiEndpoint";
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 const DeleteTask = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -108,6 +109,11 @@ const DeleteTask = () => {
                       key={task.date + task.task}
                     >
                       <div className="d-flex justify-content-start align-items-center">
+                        {task.checked && (
+                          <div className="me-2 finished-task">
+                            <IoMdCheckboxOutline />
+                          </div>
+                        )}
                         <p className="my-1 me-3">{task.task}</p>
                         <span className={task.importance}>
                           {task.importance.toUpperCase()}
