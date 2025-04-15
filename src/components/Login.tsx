@@ -26,7 +26,6 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const onSubmit = (data: FormData) => {
-    console.log(data);
     setLogging(true);
     axios
       .post(`${API_URL}/auth`, {
