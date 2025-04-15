@@ -11,19 +11,34 @@ import About from "./components/About.tsx";
 import Contact from "./components/Contact.tsx";
 import ShowTasks from "./components/ShowTasks.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
+import Login from "./components/Login.tsx";
+import Register from "./components/Register.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/add",
-    element: <AddTask />,
+    element: (
+      <ProtectedRoute>
+        <AddTask />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/delete",
-    element: <DeleteTask />,
+    element: (
+      <ProtectedRoute>
+        <DeleteTask />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/about",
@@ -35,7 +50,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/tasks",
-    element: <ShowTasks />,
+    element: (
+      <ProtectedRoute>
+        <ShowTasks />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
