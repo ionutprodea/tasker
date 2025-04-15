@@ -14,9 +14,11 @@ const DeleteTask = () => {
   const [sortedTasks, setSortedTasks] = useState<Task[]>([]);
   const [removedTask, setRemovedTask] = useState(false);
   const [removing, setRemoving] = useState(false);
+  const [loadingTasks, setLoadingTasks] = useState(false);
   const [deleteError, setDeleteError] = useState("");
 
   useEffect(() => {
+    setLoadingTasks(true);
     axios
       .get(`${API_URL}/tasks`, {
         headers: {
@@ -26,6 +28,7 @@ const DeleteTask = () => {
       .then((response) => {
         console.log(response);
         setTasks(response.data);
+        setLoadingTasks(false);
       })
       .catch((error) => {
         console.log(error);
@@ -89,7 +92,7 @@ const DeleteTask = () => {
           <h1 className="m-5">Delete Tasks</h1>
           {deleteError && <p className="text">{deleteError}</p>}
           {removedTask && <p className="text">Task deleted from database</p>}
-          {!removing && (
+          {!removing && !loadingTasks && (
             <div>
               {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
               <div className="m-5 centered-container">
@@ -123,7 +126,7 @@ const DeleteTask = () => {
               </div>
             </div>
           )}
-          {removing && (
+          {(removing || loadingTasks) && (
             <div className="m-5 centered-container">
               <div className="spinner-border spinner" role="status">
                 <span className="visually-hidden">Deleting...</span>
