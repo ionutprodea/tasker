@@ -95,7 +95,7 @@ const Login = () => {
           </div>
         )}
         <div className="centered-container">
-          <p className="text">
+          <p className="text register">
             Don't have an account?{" "}
             <Link to={"/register"} className="no-tasks-link fw-semibold">
               Register here!
