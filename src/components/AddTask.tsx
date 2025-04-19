@@ -94,20 +94,6 @@ const AddTask = () => {
             <div className="m-5 centered-container">
               <form className="add-task" onSubmit={handleSubmit(onSubmit)}>
                 {addError && <p className="form-error">{addError}</p>}
-                <select
-                  {...register("importance")}
-                  name="importance"
-                  id="importance"
-                  className="form-select mb-4"
-                >
-                  <option value="">Importance</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-                </select>
-                {errors.importance?.message && (
-                  <p className="form-error">{errors.importance.message}</p>
-                )}
                 <input
                   {...register("task")}
                   type="text"
@@ -125,12 +111,26 @@ const AddTask = () => {
                   type="text"
                   name="date"
                   id="date"
-                  placeholder="Date: __/__/20__"
+                  placeholder="DD/MM/YYYY"
                   className="form-control mb-4"
                   autoComplete="off"
                 />
                 {errors.date?.message && (
                   <p className="form-error">{errors.date.message}</p>
+                )}
+                <select
+                  {...register("importance")}
+                  name="importance"
+                  id="importance"
+                  className="form-select mb-4"
+                >
+                  <option value="">Importance</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+                {errors.importance?.message && (
+                  <p className="form-error">{errors.importance.message}</p>
                 )}
                 <textarea
                   {...register("details")}
