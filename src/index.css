@@ -201,6 +201,16 @@ h1, h2 {
   bottom: 2px;
 }
 
+.unfinished-task {
+  position: relative;
+  color: red;
+  bottom: 2px;
+}
+
+.task-checkbox:hover {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
     .task-date {
         display: block;

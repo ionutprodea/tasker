@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { API_URL } from "../services/apiEndpoint";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -152,9 +154,21 @@ const ShowTasks = () => {
                       className="form-check-input shadow-none align-self-start my-3"
                       type="checkbox"
                       name="task_status"
+                      id={task._id}
                       checked={task.checked}
                       onChange={() => handleCheckboxChange(task)}
+                      hidden
                     />
+                    <label
+                      htmlFor={task._id}
+                      className="finished-task task-checkbox"
+                    >
+                      {task.checked ? (
+                        <IoMdCheckboxOutline />
+                      ) : (
+                        <MdCheckBoxOutlineBlank />
+                      )}
+                    </label>
                   </li>
                 ))}
               </ul>

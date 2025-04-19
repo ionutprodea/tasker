@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { API_URL } from "../services/apiEndpoint";
 import { IoMdCheckboxOutline } from "react-icons/io";
+import { MdOutlineIndeterminateCheckBox } from "react-icons/md";
 
 const DeleteTask = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -109,9 +110,13 @@ const DeleteTask = () => {
                       key={task._id}
                     >
                       <div className="d-flex justify-content-start align-items-center">
-                        {task.checked && (
+                        {task.checked ? (
                           <div className="me-2 finished-task">
                             <IoMdCheckboxOutline />
+                          </div>
+                        ) : (
+                          <div className="me-2 unfinished-task">
+                            <MdOutlineIndeterminateCheckBox />
                           </div>
                         )}
                         <p className="my-1 me-3">{task.task}</p>
