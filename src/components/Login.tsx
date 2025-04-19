@@ -94,14 +94,16 @@ const Login = () => {
             </form>
           </div>
         )}
-        <div className="centered-container">
-          <p className="text register">
-            Don't have an account?{" "}
-            <Link to={"/register"} className="no-tasks-link fw-semibold">
-              Register here!
-            </Link>
-          </p>
-        </div>
+        {!logging && (
+          <div className="centered-container">
+            <p className="text register">
+              Don't have an account?{" "}
+              <Link to={"/register"} className="no-tasks-link fw-semibold">
+                Register here!
+              </Link>
+            </p>
+          </div>
+        )}
         {logging && (
           <div className="m-5 centered-container">
             <div className="spinner-border spinner" role="status">
