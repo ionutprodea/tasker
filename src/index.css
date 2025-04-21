@@ -195,6 +195,18 @@ h1, h2 {
     display: none;
 }
 
+.task-importance {
+  display: none;
+}
+
+.task-importance-mobile {
+  display: none;
+}
+
+.task-date-mobile {
+  display: block;
+}
+
 .finished-task {
   position: relative;
   color: #07d600;
@@ -211,13 +223,24 @@ h1, h2 {
   cursor: pointer;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 499px) {
+  .task-importance-mobile {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .task-importance {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 600px) {
     .task-date {
         display: block;
     }
-
     .task-date-mobile {
-        display: none;
+      display: none;
     }
 }
 

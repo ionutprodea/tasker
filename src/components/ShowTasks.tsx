@@ -126,29 +126,38 @@ const ShowTasks = () => {
                 )}
                 {sortedTasks.map((task, index) => (
                   <li
-                    className="list-group-item d-flex justify-content-between align-items-center"
+                    className="list-group-item d-flex justify-content-between align-items-start"
                     key={task._id}
                   >
-                    <div>
-                      <div className="d-flex justify-content-start align-items-center">
-                        <p className="my-1 me-3">{task.task}</p>
+                    <div className="d-flex justify-content-start">
+                      <div className="d-flex flex-column mt-2">
+                        <p className="me-3">{task.task}</p>
+                        {task.showDetails && (
+                          <div>
+                            <div className="task-importance-mobile">
+                              <span className={task.importance}>
+                                {task.importance.toUpperCase()}
+                              </span>
+                            </div>
+                            <p className="my-1 task-date-mobile">{task.date}</p>
+                            <p className="my-1 task-details">{task.details}</p>
+                          </div>
+                        )}
+                      </div>
+                      <div className="task-importance mt-2">
                         <span className={task.importance}>
                           {task.importance.toUpperCase()}
                         </span>
-                        <span className="ms-3 task-date">{task.date}</span>
-                        <div className="checkbox-wrapper-50">
-                          <input
-                            className="form-check-input shadow-none align-self-start mx-3 my-2 plus-minus"
-                            type="checkbox"
-                            name="task_description"
-                            onChange={() => handleToggleDetails(index)}
-                          />
-                        </div>
                       </div>
-                      <p className="my-1 task-date-mobile">{task.date}</p>
-                      {task.showDetails && (
-                        <p className="my-1 task-details">{task.details}</p>
-                      )}
+                      <span className="ms-3 mt-2 task-date">{task.date}</span>
+                      <div className="checkbox-wrapper-50">
+                        <input
+                          className="form-check-input shadow-none align-self-start mx-3 my-2 plus-minus"
+                          type="checkbox"
+                          name="task_description"
+                          onChange={() => handleToggleDetails(index)}
+                        />
+                      </div>
                     </div>
                     <input
                       className="form-check-input shadow-none align-self-start my-3"
@@ -161,7 +170,7 @@ const ShowTasks = () => {
                     />
                     <label
                       htmlFor={task._id}
-                      className="finished-task task-checkbox"
+                      className="finished-task task-checkbox mt-2"
                     >
                       {task.checked ? (
                         <IoMdCheckboxOutline />
