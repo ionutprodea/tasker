@@ -56,8 +56,8 @@ const About = () => {
               </p>
               <p className="text mb-4">
                 Developed as a demo project for my portfolio, Tasker showcases
-                my web development skills. For any enquiries, please use the
-                contact form or visit my{" "}
+                my web development skills. For any enquiries use the contact
+                form or visit my{" "}
                 <a href="https://ionutprodea.ro/" className="website-link">
                   personal website
                 </a>
