@@ -12,7 +12,6 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 import {
   MdCheckBoxOutlineBlank,
   MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 
 const ShowTasks = () => {
