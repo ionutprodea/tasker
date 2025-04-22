@@ -10,7 +10,10 @@ import { API_URL } from "../services/apiEndpoint";
 import { TaskSorter } from "../services/TaskSorter";
 import SortTasks from "./SortTasks";
 import { IoMdCheckboxOutline } from "react-icons/io";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import {
+  MdCheckBoxOutlineBlank,
+  MdOutlineKeyboardArrowDown,
+} from "react-icons/md";
 
 const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -133,8 +136,24 @@ const Home = () => {
                     <li className="list-group-item " key={task._id}>
                       <div className="d-flex justify-content-between align-items-start">
                         <div className="d-flex justify-content-start">
+                          <div className="details-wrapper">
+                            <input
+                              className="form-check-input shadow-none align-self-start"
+                              type="checkbox"
+                              name="task_description"
+                              id={task._id + task.task}
+                              onChange={() => handleToggleDetails(index)}
+                              hidden
+                            />
+                            <label
+                              htmlFor={task._id + task.task}
+                              className="details-toggle"
+                            >
+                              <MdOutlineKeyboardArrowDown />
+                            </label>
+                          </div>
                           <div className="d-flex flex-column mt-2">
-                            <p className="me-3">{task.task}</p>
+                            <p className="me-3 ms-4">{task.task}</p>
                           </div>
                           <div className="task-importance mt-2">
                             <span className={task.importance}>
@@ -144,14 +163,6 @@ const Home = () => {
                           <span className="ms-3 mt-2 task-date">
                             {task.date}
                           </span>
-                          <div className="checkbox-wrapper-50">
-                            <input
-                              className="form-check-input shadow-none align-self-start mx-3 my-2 plus-minus"
-                              type="checkbox"
-                              name="task_description"
-                              onChange={() => handleToggleDetails(index)}
-                            />
-                          </div>
                         </div>
                         <input
                           className="form-check-input shadow-none align-self-start my-3"
@@ -174,7 +185,7 @@ const Home = () => {
                         </label>
                       </div>
                       {task.showDetails && (
-                        <div>
+                        <div className="ms-4">
                           <div className="task-importance-mobile">
                             <span className={task.importance}>
                               {task.importance.toUpperCase()}
