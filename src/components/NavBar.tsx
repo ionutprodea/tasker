@@ -34,11 +34,6 @@ const NavBar = () => {
                   Add Tasks
                 </Link>
               </li>
-              <li className="nav-item me-3">
-                <Link to={"/delete"} className="nav-link">
-                  Delete Tasks
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

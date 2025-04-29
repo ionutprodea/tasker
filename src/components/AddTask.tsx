@@ -86,7 +86,7 @@ const AddTask = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="app-container d-flex flex-column justify-content-between">
-        <div>
+        <div className="mb-5">
           <NavBar />
           <h1 className="m-5">Add Tasks</h1>
           {taskAdded && <p className="text">Task uploaded to database</p>}

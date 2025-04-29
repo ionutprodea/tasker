@@ -276,7 +276,15 @@ h1, h2 {
 /* Footer */
 
 .footer {
-    background-color: black;
+    background-color: rgb(29, 29, 29);
     height: 60px;
-    opacity: 30%;
+    width: 100vw;
+    opacity: 100%;
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+}
+
+.footer .nav-link {
+  color: var(--primary_color);
 }

@@ -127,7 +127,7 @@ const ShowTasks = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="app-container d-flex flex-column justify-content-between">
-        <div>
+        <div className="mb-5">
           <NavBar />
           <h1 className="m-5">Tasks</h1>
           {deleteError && <p className="text">{deleteError}</p>}
