@@ -57,7 +57,7 @@ const Login = () => {
       <div>
         <NavBar />
         <h1 className="m-5">Login</h1>
-        <p className="text">You are not logged in. Please log in.</p>
+        <p className="text not-logged">You are not logged in. Please log in.</p>
         {!logging && (
           <div className="m-5 centered-container">
             <form className="login" onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +87,10 @@ const Login = () => {
                 <p className="form-error">{errors.password.message}</p>
               )}
               <div className="d-flex justify-content-center">
-                <button type="submit" className="btn btn-primary px-5">
+                <button
+                  type="submit"
+                  className="btn btn-primary submit-btn px-5"
+                >
                   Submit
                 </button>
               </div>

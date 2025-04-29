@@ -144,7 +144,10 @@ const AddTask = () => {
                   <p className="form-error">{errors.details.message}</p>
                 )}
                 <div className="d-flex justify-content-center">
-                  <button type="submit" className="btn btn-primary px-5">
+                  <button
+                    type="submit"
+                    className="btn btn-primary submit-btn px-5"
+                  >
                     Submit
                   </button>
                 </div>
