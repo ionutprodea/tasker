@@ -20,6 +20,8 @@ const ShowTasks = () => {
   const [sortedTasks, setSortedTasks] = useState<Task[]>([]);
   const [updatingTask, setUpdatingTask] = useState(false);
   const [loadingTasks, setLoadingTasks] = useState(false);
+  const [removedTask, setRemovedTask] = useState("");
+  const [deleteError, setDeleteError] = useState("");
 
   const handleCheckboxChange = (task: Task) => {
     const updatedTask = { ...task, checked: !task.checked };
@@ -63,7 +65,8 @@ const ShowTasks = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [removedTask]);
+
   useEffect(() => {
     if (tasks) {
       const sorted = TaskSorter(sortOption, tasks) || [];
@@ -77,6 +80,29 @@ const ShowTasks = () => {
     );
     setTasks(toggledTasks);
   };
+
+  const onRemove = (_id: string) => {
+    setUpdatingTask(true);
+    axios
+      .delete(`${API_URL}/tasks/${_id}`, {
+        headers: {
+          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+        },
+      })
+      .then((response) => {
+        console.log(`Removing task with ID: ${response.data._id}`);
+        setUpdatingTask(false);
+        setRemovedTask(_id);
+      })
+      .catch((error) => {
+        console.log(error.response?.data || error.message);
+        if (error.response) setDeleteError(error.response.data);
+        else if (error.request) setDeleteError("No response from the server");
+        else setDeleteError("Unexpected error. Please try again");
+        setUpdatingTask(false);
+      });
+  };
+
   return (
     <>
       <Helmet>
@@ -104,6 +130,8 @@ const ShowTasks = () => {
         <div>
           <NavBar />
           <h1 className="m-5">Tasks</h1>
+          {deleteError && <p className="text">{deleteError}</p>}
+          {removedTask && <p className="text">Task deleted from database</p>}
           {(updatingTask || loadingTasks) && (
             <div className="m-5 centered-container">
               <div className="spinner-border spinner" role="status">
@@ -186,6 +214,12 @@ const ShowTasks = () => {
                         </div>
                         <p className="my-1 task-date-mobile">{task.date}</p>
                         <p className="my-1 task-details">{task.details}</p>
+                        <button
+                          className="btn btn-primary my-3"
+                          onClick={() => onRemove(task._id)}
+                        >
+                          Delete Task
+                        </button>
                       </div>
                     )}
                   </li>
