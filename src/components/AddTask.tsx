@@ -14,9 +14,24 @@ const schema = z.object({
     .string()
     .min(3, { message: "Required, at least 3 letters" })
     .max(16, { message: "Maximum 16 letters" }),
-  date: z.string().refine((value) => /^\d{2}\/\d{2}\/\d{4}$/.test(value), {
-    message: "Invalid date format. Use DD/MM/YYYY",
-  }),
+  date: z
+    .string()
+    .refine((value) => /^\d{2}\/\d{2}\/\d{4}$/.test(value), {
+      message: "Invalid date format. Use DD/MM/YYYY",
+    })
+    .refine(
+      (value) => {
+        const [day, month, year] = value.split("/").map(Number);
+        const inputDate = new Date(year, month - 1, day);
+        const today = new Date();
+        inputDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+        return inputDate >= today;
+      },
+      {
+        message: "Task date is in the past",
+      }
+    ),
   details: z
     .string()
     .min(8, { message: "Required, at least 8 letters" })
