@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LoggedUser from "./LoggedUser";
 
 const NavBar = () => {
   return (
@@ -33,6 +34,9 @@ const NavBar = () => {
                 <Link to={"/add"} className="nav-link">
                   Add Tasks
                 </Link>
+              </li>
+              <li className="nav-item me-3 logged-user">
+                <LoggedUser />
               </li>
             </ul>
           </div>

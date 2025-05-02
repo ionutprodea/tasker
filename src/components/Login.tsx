@@ -34,7 +34,8 @@ const Login = () => {
       })
       .then((response) => {
         console.log(response);
-        sessionStorage.setItem("tasker-auth-token", response.data);
+        sessionStorage.setItem("tasker-auth-token", response.data.token);
+        sessionStorage.setItem("tasker-logged-user", response.data.username);
         navigate("/");
         setLogging(false);
         setFailedLogin("");

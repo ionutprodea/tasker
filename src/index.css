@@ -98,6 +98,11 @@ h1, h2 {
     color: var(--secondary_color);
 }
 
+@media screen and (min-width: 768px) {
+  .user-menu {
+    display: flex;
+  }
+}
 
 /* Form */
 
