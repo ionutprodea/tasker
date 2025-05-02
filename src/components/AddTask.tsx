@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
@@ -45,7 +45,6 @@ const AddTask = () => {
   const [taskAdded, setTaskAdded] = useState(false);
   const [addError, setAddError] = useState("");
 
-  useEffect(() => {});
   const {
     register,
     handleSubmit,
