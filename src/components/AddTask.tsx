@@ -163,7 +163,7 @@ const AddTask = () => {
                     type="submit"
                     className="btn btn-primary submit-btn px-5"
                   >
-                    Submit
+                    Add Task
                   </button>
                 </div>
               </form>

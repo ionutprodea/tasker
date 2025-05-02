@@ -147,7 +147,7 @@ const Contact = () => {
                   type="submit"
                   className="btn btn-primary submit-btn px-5"
                 >
-                  Submit
+                  Send Message
                 </button>
               </div>
               {sending && (

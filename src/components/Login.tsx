@@ -57,7 +57,11 @@ const Login = () => {
       <div>
         <NavBar />
         <h1 className="m-5">Login</h1>
-        <p className="text not-logged">You are not logged in. Please log in.</p>
+        {!logging && (
+          <p className="text not-logged">
+            You are not logged in. Please log in.
+          </p>
+        )}
         {!logging && (
           <div className="m-5 centered-container">
             <form className="login" onSubmit={handleSubmit(onSubmit)}>
@@ -91,7 +95,7 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary submit-btn px-5"
                 >
-                  Submit
+                  Log in
                 </button>
               </div>
             </form>
