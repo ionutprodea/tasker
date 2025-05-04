@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import LoggedUser from "./LoggedUser";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
+  const [isLogged, setIsLogged] = useState("");
+  useEffect(() => {
+    const logged = sessionStorage.getItem("tasker-logged-user");
+    if (logged) setIsLogged(logged);
+  }, []);
   return (
     <>
       <nav
@@ -35,6 +41,13 @@ const NavBar = () => {
                   Add Tasks
                 </Link>
               </li>
+              {!isLogged && (
+                <li className="nav-item me-3">
+                  <Link to={"/login"} className="nav-link">
+                    Log in
+                  </Link>
+                </li>
+              )}
               <li className="nav-item me-3 logged-user">
                 <LoggedUser />
               </li>
