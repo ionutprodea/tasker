@@ -219,6 +219,18 @@ const Home = () => {
                           </div>
                           <p className="my-1 task-date-mobile">{task.date}</p>
                           <p className="my-1 task-details">{task.details}</p>
+                          <Link
+                            to={`/tasks/${task._id}`}
+                            className="btn btn-primary my-3 me-3"
+                            onClick={() =>
+                              sessionStorage.setItem(
+                                "tasker-edit-redirect",
+                                "home"
+                              )
+                            }
+                          >
+                            Edit Task
+                          </Link>
                           <button
                             className="btn btn-primary my-3"
                             onClick={() => onRemove(task._id)}

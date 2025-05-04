@@ -14,6 +14,7 @@ import ErrorPage from "./components/ErrorPage.tsx";
 import Login from "./components/Login.tsx";
 import Register from "./components/Register.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import EditTask from "./components/EditTask.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
         <ShowTasks />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/tasks/:id",
+    element: <EditTask />,
   },
   {
     path: "/login",
