@@ -28,7 +28,7 @@ const ShowTasks = () => {
     setUpdatingTask(true);
     axios
       .put(
-        `${API_URL}/tasks/${task._id}`,
+        `${API_URL}/tasks/${task._id}/checkbox`,
         { checked: updatedTask.checked },
         {
           headers: {
