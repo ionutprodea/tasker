@@ -13,6 +13,7 @@ import {
   MdCheckBoxOutlineBlank,
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
+import { getToken } from "../services/token";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -32,7 +33,7 @@ const ShowTasks = () => {
         { checked: updatedTask.checked },
         {
           headers: {
-            "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+            "x-auth-token": getToken(),
           },
         }
       )
@@ -54,7 +55,7 @@ const ShowTasks = () => {
     axios
       .get(`${API_URL}/tasks`, {
         headers: {
-          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+          "x-auth-token": getToken(),
         },
       })
       .then((response) => {
@@ -86,7 +87,7 @@ const ShowTasks = () => {
     axios
       .delete(`${API_URL}/tasks/${_id}`, {
         headers: {
-          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+          "x-auth-token": getToken(),
         },
       })
       .then((response) => {

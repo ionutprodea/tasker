@@ -9,6 +9,7 @@ import axios from "axios";
 import { API_URL } from "../services/apiEndpoint";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "../services/token";
 
 const schema = z.object({
   importance: z.string().min(1, { message: "Select importance" }),
@@ -54,7 +55,7 @@ const EditTask = () => {
     axios
       .get(`${API_URL}/tasks/${params.id}`, {
         headers: {
-          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+          "x-auth-token": getToken(),
         },
       })
       .then((response) => {
@@ -82,7 +83,7 @@ const EditTask = () => {
     axios
       .put(`${API_URL}/tasks/${params.id}`, data, {
         headers: {
-          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+          "x-auth-token": getToken(),
         },
       })
       .then((response) => {

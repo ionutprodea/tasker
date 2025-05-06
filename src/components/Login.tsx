@@ -11,6 +11,7 @@ import { API_URL } from "../services/apiEndpoint";
 const schema = z.object({
   email: z.string().email({ message: "Invalid email adress" }).min(5).max(75),
   password: z.string().min(6, { message: "Password is required" }).max(255),
+  rememberUser: z.boolean(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -33,9 +34,15 @@ const Login = () => {
         password: data.password,
       })
       .then((response) => {
+        console.log(data.rememberUser);
         console.log(response);
-        sessionStorage.setItem("tasker-auth-token", response.data.token);
-        sessionStorage.setItem("tasker-logged-user", response.data.username);
+        if (data.rememberUser) {
+          localStorage.setItem("tasker-auth-token", response.data.token);
+          localStorage.setItem("tasker-logged-user", response.data.username);
+        } else {
+          sessionStorage.setItem("tasker-auth-token", response.data.token);
+          sessionStorage.setItem("tasker-logged-user", response.data.username);
+        }
         navigate("/");
         setLogging(false);
         setFailedLogin("");
@@ -70,7 +77,6 @@ const Login = () => {
               <input
                 {...register("email")}
                 type="text"
-                name="email"
                 id="email"
                 placeholder="Email..."
                 className="form-control mb-4"
@@ -82,7 +88,6 @@ const Login = () => {
               <input
                 {...register("password")}
                 type="password"
-                name="password"
                 id="password"
                 placeholder="Password..."
                 className="form-control mb-4"
@@ -91,13 +96,24 @@ const Login = () => {
               {errors.password?.message && (
                 <p className="form-error">{errors.password.message}</p>
               )}
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center mb-4">
                 <button
                   type="submit"
                   className="btn btn-primary submit-btn px-5"
                 >
                   Log in
                 </button>
+              </div>
+              <div className="d-flex justify-content-center">
+                <label htmlFor="keep-logged" className="form-error">
+                  Remember me
+                </label>
+                <input
+                  {...register("rememberUser")}
+                  type="checkbox"
+                  id="keep-logged"
+                  className="ms-2"
+                />
               </div>
             </form>
           </div>

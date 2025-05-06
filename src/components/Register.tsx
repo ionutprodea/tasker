@@ -37,7 +37,6 @@ const Register = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const onSubmit = (data: FormData) => {
-    console.log(data);
     setRegistering(true);
     axios
       .post(`${API_URL}/users`, {

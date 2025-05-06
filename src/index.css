@@ -171,6 +171,11 @@ h1, h2 {
   color: var(--secondary_color);
 }
 
+#keep-logged {
+    position: relative;
+    top: 2px;
+}
+
 /* Show Tasks */
 
 .list-group {

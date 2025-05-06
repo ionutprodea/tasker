@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { API_URL } from "../services/apiEndpoint";
+import { getToken } from "../services/token";
 
 const schema = z.object({
   importance: z.string().min(1, { message: "Select importance" }),
@@ -58,7 +59,7 @@ const AddTask = () => {
     axios
       .post(`${API_URL}/tasks`, data, {
         headers: {
-          "x-auth-token": sessionStorage.getItem("tasker-auth-token"),
+          "x-auth-token": getToken(),
         },
       })
       .then((response) => {

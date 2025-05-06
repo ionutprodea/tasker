@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 const NavBar = () => {
   const [isLogged, setIsLogged] = useState("");
   useEffect(() => {
-    const logged = sessionStorage.getItem("tasker-logged-user");
-    if (logged) setIsLogged(logged);
+    const rememberUser = localStorage.getItem("tasker-logged-user");
+    if (rememberUser) setIsLogged(rememberUser);
+    const loggedUser = sessionStorage.getItem("tasker-logged-user");
+    if (loggedUser) setIsLogged(loggedUser);
   }, []);
   return (
     <>

@@ -14,10 +14,14 @@ const LoggedUser = () => {
   const handleLogout = () => {
     sessionStorage.setItem("tasker-auth-token", "");
     sessionStorage.setItem("tasker-logged-user", "");
+    localStorage.setItem("tasker-logged-user", "");
+    localStorage.setItem("tasker-auth-token", "");
     navigate("/login");
   };
 
   useEffect(() => {
+    const rememberUser = localStorage.getItem("tasker-logged-user");
+    if (rememberUser) setUserName(rememberUser);
     const loggedUser = sessionStorage.getItem("tasker-logged-user");
     if (loggedUser) setUserName(loggedUser);
   }, []);
