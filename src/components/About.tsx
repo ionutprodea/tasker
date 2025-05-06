@@ -49,6 +49,13 @@ const About = () => {
                 out through the contact page.
               </p>
               <p className="text mb-4">
+                Tasker’s backend services are hosted on Render using a free
+                plan. Because of this, it may take a few seconds for requests to
+                be processed, especially after periods of inactivity. I
+                appreciate your patience and apologize for any inconvenience
+                this may cause.
+              </p>
+              <p className="text mb-4">
                 Built with a mobile-first approach, Tasker is fully responsive,
                 delivering a smooth experience on small and medium display
                 devices. The interface remains clean and minimal, though it may
