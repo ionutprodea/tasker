@@ -6,7 +6,6 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home.tsx";
 import AddTask from "./components/AddTask.tsx";
-import DeleteTask from "./components/DeleteTask.tsx";
 import About from "./components/About.tsx";
 import Contact from "./components/Contact.tsx";
 import ShowTasks from "./components/ShowTasks.tsx";
@@ -30,14 +29,6 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AddTask />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/delete",
-    element: (
-      <ProtectedRoute>
-        <DeleteTask />
       </ProtectedRoute>
     ),
   },
