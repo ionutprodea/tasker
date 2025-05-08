@@ -65,7 +65,10 @@ const About = () => {
                 Developed as a demo project for my portfolio, Tasker showcases
                 my web development skills. For any enquiries use the contact
                 form or visit my{" "}
-                <a href="https://ionutprodea.ro/" className="website-link">
+                <a
+                  href="https://ionutprodea.ro/"
+                  className="website-link fw-semibold"
+                >
                   personal website
                 </a>
                 .
