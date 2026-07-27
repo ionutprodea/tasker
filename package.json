@@ -31,8 +31,8 @@
     "@typescript-eslint/parser": "^8.65.0",
     "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^10.8.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
     "typescript": "^5.2.2",
     "vite": "^8.1.3"
   }
