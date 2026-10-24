@@ -133,13 +133,15 @@ const ShowTasks = () => {
           <h1 className="m-5">Tasks</h1>
           {deleteError && <p className="text">{deleteError}</p>}
           {removedTask && <p className="text">Task deleted from database</p>}
-          {(updatingTask || loadingTasks) && (
-            <div className="m-5 centered-container">
-              <div className="spinner-border spinner" role="status">
-                <span className="visually-hidden">Updating...</span>
-              </div>
+          <div
+            className={`m-5 centered-container ${
+            updatingTask || loadingTasks ? "" : "spinner-placeholder"
+            }`}
+          >
+            <div className="spinner-border spinner" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
-          )}
+          </div>
           {tasks.length >= 1 && <SortTasks onSortChange={setSortOption} />}
           {(!updatingTask || !loadingTasks) && (
             <div className="m-5 centered-container">

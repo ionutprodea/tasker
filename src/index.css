@@ -178,6 +178,10 @@ h1, h2 {
 
 /* Show Tasks */
 
+.spinner-placeholder {
+  visibility: hidden;
+}
+
 .list-group {
     width: 700px;
     border-radius: 20px;
